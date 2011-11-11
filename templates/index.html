@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<title>Mad Chatter</title>
+	<link rel="stylesheet" href="stylesheets/reset.css">
+	<link rel="stylesheet" href="stylesheets/styles.css">
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js'></script>
+	<script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js'></script>
+	<script src='javascript.js'></script>
+	<script>
+		$(document).ready(function(){
+			MadChatter.init('ws://localhost:8100');
+		});
+	</script>
+  </head>
+  <body>
+		
+	<div id="login_screen">
+		<header>
+			<h1>Welcome!</h1>
+		</header>
+		<div id="pick_a_username">
+			<p>What is your name?</p>
+			<input id="username" type="text"> <button id="join">Join</button>
+		</div>
+	</div>
+		
+	<div id="chatroom">
+		<div id="sidebar">
+			<h2>Members</h2>
+			<ul id="members"></ul>
+		</div>
+		<div id="keyboard">
+			<input type="text">
+		</div>
+		<div id="messages"></div>
+	</div>
+		
+  </body>
+</html>

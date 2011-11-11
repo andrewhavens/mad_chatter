@@ -1,0 +1,121 @@
+#login_screen header {
+	padding: 150px 0 20px;
+	color: #fff;
+	background-color: #000;
+	text-align: center;
+	font: 25px Verdana, Geneva, Arial, Helvetica, sans-serif;
+}
+
+#pick_a_username {
+	text-align: center;
+	background: #fff;
+	padding: 5px 10px 10px;
+	font: 18px Verdana, Geneva, Arial, Helvetica, sans-serif;
+}
+
+#pick_a_username p {
+	margin: 10px;
+}
+#pick_a_username input, #pick_a_username button {
+	font: 14px Verdana, Geneva, Arial, Helvetica, sans-serif;
+	padding: 5px;
+}
+/*
+#chatroom {
+	text-align: left;
+	background: #fff;
+	padding: 5px 10px 10px;
+}
+
+#chatroom #sidebar {
+	float: left;
+	width: 200px;
+	color: #fff;
+	background-color: #000;
+	height: 100%;
+}
+
+#chatroom #body {
+	float: right;
+	margin-left: 200px;
+	width: 580px;
+	height: 100%;
+}
+*/
+
+#chatroom{
+	margin:0;
+	padding:0 0 100px 200px;
+	font: 12px Verdana, Geneva, Arial, Helvetica, sans-serif;
+}
+
+#sidebar{
+	position:absolute;
+	top:0;
+	left:0;
+	width:200px;
+	height:100%;
+	color: #fff;
+	background-color: #000;
+	padding: 20px 5px 0 15px;
+}
+
+#sidebar h2 {
+	font: 14px Verdana, Geneva, Arial, Helvetica, sans-serif;
+	margin-bottom: 10px;
+}
+
+#sidebar ul#members li {
+	margin-left: 1em;
+}
+
+#messages {
+	padding: 20px 10px 0px 40px;
+}
+
+#messages p {
+	padding: 0.25em;
+}
+
+#messages time {
+	float: right;
+	color: #999;
+}
+
+#messages .status {
+	text-align: center;
+	color: #999;
+}
+
+#keyboard{
+	position:absolute;
+	bottom:0;
+	left:220px;
+	width:400%;
+	height:50px;
+	background-color: #eee;
+	padding: 10px 0 0 20px;
+}
+
+#keyboard input {
+	width: 15%;
+	padding: 5px;
+}
+
+@media screen{
+	#chatroom>div#sidebar{
+		position:fixed;
+	}
+	#chatroom>div#keyboard{
+		position:fixed;
+	}
+}
+
+* html #chatroom{
+	overflow:hidden;
+} 
+
+* html div#messages{
+	height:100%;
+	overflow:auto;
+}
