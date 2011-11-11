@@ -1,7 +1,5 @@
 #!/usr/bin/env ruby
 
-# require 'mad_chatter'
-
 require "thor"
 
 module MadChatter
@@ -10,17 +8,18 @@ module MadChatter
     include Thor::Actions
     
     def self.source_root
-      File.expand_path(File.dirname(__FILE__) + '/../')
+      File.expand_path("../../", __FILE__)
     end
     
     desc "new", "Creates a scaffold of a new Mad Chatter chatroom"
     def new(name)
+      empty_directory "#{name}/extensions"
       copy_file "templates/index.html", "#{name}/web/index.html"
       copy_file "templates/javascript.js", "#{name}/web/javascript.js"
       copy_file "templates/stylesheets/reset.css", "#{name}/web/stylesheets/reset.css"
       copy_file "templates/stylesheets/styles.css", "#{name}/web/stylesheets/styles.css"
       copy_file "README.md", "#{name}/README.md"
-      copy_file "README.md", "#{name}/LICENSE"
+      copy_file "LICENSE", "#{name}/LICENSE"
     end
     
   end
