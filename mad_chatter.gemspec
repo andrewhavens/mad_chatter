@@ -6,6 +6,13 @@ Gem::Specification.new do |s|
   s.description = "Mad Chatter is a fun, easy to customize chat server written in Ruby utilizing HTML 5 Web Sockets"
   s.authors     = ["Andrew Havens"]
   s.email       = 'email@andrewhavens.com'
-  s.files       = ["lib/mad_chatter.rb"]
   s.homepage    = 'http://github.com/andrewhavens/mad_chatter'
+  
+  s.files        = Dir["{lib}/**/*.rb", "bin/*", "LICENSE", "*.md"]
+  s.require_path = 'lib'
+  s.executables << 'mad_chatter'
+  
+  # If you have other dependencies, add them here
+  # s.add_dependency "another", "~> 1.2"
+
 end
