@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.email       = 'email@andrewhavens.com'
   s.homepage    = 'http://github.com/andrewhavens/mad_chatter'
   
-  s.files        = Dir["{lib}/**/*.rb", "bin/*", "templates/*", "templates/**/*", "LICENSE", "README"]
+  s.files        = Dir["{lib}/**/*.rb", "bin/*", "templates/*", "templates/**/*", "LICENSE", "README.md"]
   s.require_path = 'lib'
   s.executables << 'mad_chatter'
   

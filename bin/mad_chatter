@@ -14,7 +14,7 @@ module MadChatter
     desc "new [name]", "Generates a new Mad Chatter chatroom application"
     def new(name)
       empty_directory "#{name}/extensions"
-      copy_file "README", "#{name}/README"
+      copy_file "README.md", "#{name}/README.md"
       copy_file "templates/config.rb", "#{name}/config.rb"
       copy_file "templates/index.html", "#{name}/web/index.html"
       copy_file "templates/javascript.js", "#{name}/web/javascript.js"
