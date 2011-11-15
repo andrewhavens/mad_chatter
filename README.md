@@ -64,3 +64,11 @@ The extensions directory is for you to create your own chat actions. You can add
 ##Contributing
 
 Please fork and send pull requests! Or submit issues if you have suggestions on how to improve.
+
+##TODO
+
+ - Actually implement the server daemonization mentioned above
+ - Provide an example config file
+ - Come up with a better approach to configuration/extension
+ - Switch from em-websocket to Juggernaut, Socket.io, or Cramp and web-socket-js for better cross-browser support
+ - Add tests!
