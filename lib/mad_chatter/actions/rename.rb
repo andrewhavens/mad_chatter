@@ -1,27 +1,24 @@
 module MadChatter
-  
   module Actions
-    
-    class Rename < MadChatter::Actions::Base
+    class Rename < MadChatter::Action
       
-      @@command = '/nick'
+      @@regex = /\/nick (.+)/
       
-      def process
-        old_username = username
-        username = parse_username_from_message
-        MadChatter::Users.update(@user_token, username)
-        MadChatter::Server.send_users_list
-        MadChatter::Server.send_status("#{old_username} is now known as #{username}")
+      def handle(message)
+        if message.text =~ @@regex
+          old_username = message.username
+          username = parse_username(message.text)
+          MadChatter::Users.update(message.token, username)
+          send_status_message "#{old_username} is now known as #{username}"
+          send_users_list
+          stop_message_handling
+        end
       end
       
-      def parse_username_from_message
-        # clear the command from the message string
-        # the rest will be the new username
-        username = @message.sub("#{@@command} ", '')
+      def parse_username(text)
+        @@regex.match(text).captures[0]
       end
       
     end
-    
   end
-  
 end

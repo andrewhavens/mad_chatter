@@ -1,22 +1,22 @@
-require 'mad_chatter/actions'
-require 'mad_chatter/actions/base'
-
 module MadChatter
-  
-  class Message < MadChatter::Actions::Base; end
-
-  class MessageFactory
-  
-    def self.find(message, user_token)
-      MadChatter::Actions.registered_actions.each do |command, action_class|
-        # puts "looping through registered actions, command: #{command}, action_class: #{action_class}"
-        if message =~ /^#{command}/
-          return eval(action_class).new(message, user_token)
-        end
-      end
-      # puts 'could not find match for ' + message
-      MadChatter::Message.new(message, user_token)
-    end    
+  class Message
+    
+    attr_accessor :type, :text, :token, :username
+    
+    def initialize(type, message_text, token = nil, username = nil)
+      @type = type
+      @text = message_text
+      @token = token
+      @username = username
+    end
+    
+    def to_s
+      JSON.generate({
+        type: @type,
+        message: @text,
+        username: @username,
+      })
+    end
+    
   end
-
 end

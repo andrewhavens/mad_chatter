@@ -1,116 +1,79 @@
-require 'digest/sha1'
-require 'mad_chatter/users'
-require 'mad_chatter/message'
-
 module MadChatter
   
   class Server
     
-    def initialize(options = {})
-      defaults = {
-        :host => "0.0.0.0",
-        :port => 8100
-      }
-      @options = defaults.merge!(options)
+    def initialize(config)
+      @config = config
+      @server = initialize_server
     end
     
     def self.main_channel
       @main_channel ||= EventMachine::Channel.new
     end
+    
+    def initialize_server
+      # TODO: Figure out a better (more flexible/dynamic) way to initialize the server class
+      if @config['websocket_backend'] && @config['websocket_backend'] == 'MadChatter::Servers::EventMachineWebSocket'
+        return MadChatter::Servers::EventMachineWebSocket.new(self, @config['websocket_port'])
+      end
+      
+      raise 'You did not specify a valid class name for websocket_backend'
+    end
   
     def start
-      EventMachine::WebSocket.start(@options) do |ws|
-        
-        ws.onopen do
-          
-          subscriber_id = MadChatter::Server.main_channel.subscribe { |msg| ws.send(msg) } #main send method, gets called when @main_channel.push gets called
-          token = generate_token()
-          send_client_token(ws, token)
-          
-          ws.onclose do
-            username = MadChatter::Users.username(token)
-            if username
-              MadChatter::Server.send_status "#{username} has left the chatroom"
-              MadChatter::Users.remove(token)
-            end
-            MadChatter::Server.main_channel.unsubscribe(subscriber_id)
-          end
-          
-          ws.onmessage do |msg_json|
-            msg = JSON.parse(msg_json)
-            if msg['token'].nil?
-              send_client_error(ws, 'Token is required')
-            else
-              message = MadChatter::MessageFactory.find(msg['message'], msg['token'])
-              message.process
-            end
-          end
-          
-        end
+      EM.run do
+        puts "Starting Mad Chatter Web Socket server on port #{@config['websocket_port']}."
+        @server.start
       end
     end
     
-    def generate_token
-      Digest::SHA1.hexdigest Time.now.to_s
+    def register_connection(&send_client_message_block)
+      subscriber_id = MadChatter::Server.main_channel.subscribe(send_client_message_block)
+      send_client_message_block.call(connection_token)
     end
     
-    def send_client_error(client, message)
-      data = JSON.generate({
-        type: 'error',
-        message: message
-      })
-      send_to_client(client, data)
+    def connection_token
+      token = Digest::SHA1.hexdigest Time.now.to_s
+      MadChatter::Message.new('token', token).to_s
     end
+    
+    def connection_closed(id)
+      MadChatter::Server.main_channel.unsubscribe(id)
+    end
+    
+    def message_received(json)
+      msg = JSON.parse(json)
+      username = MadChatter::Users.find_username_by_token(msg['token'])
+      message = MadChatter::Message.new(msg['type'], msg['message'], msg['token'], username)
+      
+      if message.token.nil?
+        return # Token is required to send messages
+      end
+      
+      begin
+          MadChatter.simple_extensions.each do |extension|
+          if message.text =~ extension[:regex]
+            MadChatter::Action.instance_exec do
+              args = extension[:regex].match(message.text).captures
+              extension[:block].call(args)
+            end
+          end
+        end
+    
+        MadChatter.extension_classes.each do |extension|
+          extension.handle(message)
+        end
         
-    def send_client_token(client, token)
-      data = JSON.generate({
-        type: 'token',
-        message: token
-      })
-      send_to_client(client, data)
+        MadChatter::Server.send_json(message.to_s)
+      rescue RuntimeError
+        # dont need to do anything, just prevent any errors from stopping the server
+      end
     end
     
-    def send_to_client(client, data)
-      client.send(data)
+    def self.send_json(json)
+      MadChatter::Server.main_channel.push(json)
     end
     
-    def self.send_users_list
-      data = JSON.generate({
-        type: 'users',
-        message: MadChatter::Users.current
-      })
-      MadChatter::Server.push_to_all_connections(data)
-    end
-    
-    def self.send_status(message)
-      data = JSON.generate({
-        type: 'status',
-        message: message
-      })
-      MadChatter::Server.push_to_all_connections(data)
-    end
-    
-    def self.send_message(username, message)
-      data = JSON.generate({
-        type: 'message',
-        username: username,
-        message: message
-      })
-      MadChatter::Server.push_to_all_connections(data)
-    end
-    
-    def self.send_action(message)
-      data = JSON.generate({
-        type: 'action',
-        message: message
-      })
-      MadChatter::Server.push_to_all_connections(data)
-    end
-    
-    def Server.push_to_all_connections(data)
-      # puts 'sending to all clients: ' + data
-      MadChatter::Server.main_channel.push(data)
-    end
   end
 
 end

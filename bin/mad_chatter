@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
-require "thor"
+require 'thor'
+require File.expand_path('../../lib/mad_chatter', __FILE__)
 
 module MadChatter
   
@@ -8,30 +9,39 @@ module MadChatter
     include Thor::Actions
     
     def self.source_root
-      File.expand_path("../", File.dirname(__FILE__))
+      File.expand_path('../../', __FILE__)
     end
     
     desc "new [name]", "Generates a new Mad Chatter chatroom application"
     def new(name)
-      empty_directory "#{name}/extensions"
+      copy_file "templates/config.yml", "#{name}/config.yml"
+      copy_file "templates/extensions.rb", "#{name}/extensions.rb"
       copy_file "README.md", "#{name}/README.md"
-      copy_file "templates/config.rb", "#{name}/config.rb"
+      empty_directory "#{name}/extensions"
       copy_file "templates/index.html", "#{name}/web/index.html"
       copy_file "templates/javascript.js", "#{name}/web/javascript.js"
       copy_file "templates/stylesheets/reset.css", "#{name}/web/stylesheets/reset.css"
       copy_file "templates/stylesheets/styles.css", "#{name}/web/stylesheets/styles.css"
     end
     
-    desc 'start', 'Starts the chat server daemon'
+    desc 'start', 'Starts the chat server'
     def start
-      puts 'TODO'
+      MadChatter.start
     end
     
-    desc 'stop', 'Stops the chat server daemon'
+    desc 'stop', 'Stops the chat server'
     def stop
-      puts 'TODO'
+      # stop the currently running daemon
+      # not sure how to best implement this part yet
     end
+    
+    desc 'restart', 'Restarts the chat server'
+    def restart
+      # restarts the currently running daemon
+      # not sure how to best implement this part yet
+    end
+    
   end
 end
 
-MadChatter::Cli.start
+MadChatter::Cli.start(ARGV)

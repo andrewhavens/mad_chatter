@@ -110,7 +110,7 @@ var MadChatter = {
 	},
 	
 	display_message: function(username, message){
-		$("#messages").append("<p><strong>" + username + ":</strong> " + message + "<time>" + get_current_time() + "</time></p>");
+		$("#messages").append("<p class='message'><span class='username'>" + username + ":</span> " + message + "<time>" + get_current_time() + "</time></p>");
 	},
 	
 	scroll_to_bottom_of_chat: function(){

@@ -77,12 +77,16 @@
 	padding: 0.25em;
 }
 
-#messages time {
+#messages p.message .username {
+	font-weight: bold;
+}
+
+#messages p.message time {
 	float: right;
 	color: #999;
 }
 
-#messages .status {
+#messages p.status {
 	text-align: center;
 	color: #999;
 }

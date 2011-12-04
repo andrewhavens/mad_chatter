@@ -13,4 +13,5 @@ PLATFORMS
 
 DEPENDENCIES
   em-websocket
+  eventmachine (= 0.12.10)
   thor

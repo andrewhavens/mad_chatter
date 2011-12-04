@@ -1,8 +1,6 @@
 module MadChatter
-  
   class Users
     
-    # Singleton storage for all current users
     class << self
       
       def users
@@ -17,7 +15,7 @@ module MadChatter
         MadChatter::Users.users.delete(token)
       end
       
-      def username(token)
+      def find_username_by_token(token)
         MadChatter::Users.users[token]
       end
       
@@ -31,5 +29,4 @@ module MadChatter
     end
     
   end
-  
 end
