@@ -6,15 +6,17 @@ require 'eventmachine'
 require 'json'
 require 'digest/sha1'
 
-require 'mad_chatter/extensions'
 require 'mad_chatter/action'
-require 'mad_chatter/cli'
 require 'mad_chatter/config'
+require 'mad_chatter/extensions'
 require 'mad_chatter/message'
 require 'mad_chatter/server'
-require 'mad_chatter/servers/em_websocket'
 require 'mad_chatter/users'
-require 'mad_chatter/actions/base'
+
+require 'mad_chatter/actions/join'
+require 'mad_chatter/actions/rename'
+
+require 'mad_chatter/servers/em_websocket'
 
 module MadChatter
 
@@ -25,6 +27,3 @@ module MadChatter
   end
   
 end
-
-require 'mad_chatter/actions/join'
-require 'mad_chatter/actions/rename'

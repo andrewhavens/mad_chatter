@@ -20,28 +20,6 @@
 	font: 14px Verdana, Geneva, Arial, Helvetica, sans-serif;
 	padding: 5px;
 }
-/*
-#chatroom {
-	text-align: left;
-	background: #fff;
-	padding: 5px 10px 10px;
-}
-
-#chatroom #sidebar {
-	float: left;
-	width: 200px;
-	color: #fff;
-	background-color: #000;
-	height: 100%;
-}
-
-#chatroom #body {
-	float: right;
-	margin-left: 200px;
-	width: 580px;
-	height: 100%;
-}
-*/
 
 #chatroom{
 	margin:0;
@@ -81,7 +59,7 @@
 	font-weight: bold;
 }
 
-#messages p.message time {
+#messages p.message time, #messages p.status time {
 	float: right;
 	color: #999;
 }
@@ -92,7 +70,7 @@
 }
 
 #keyboard{
-	position:absolute;
+/*	position:absolute;*/
 	bottom:0;
 	left:220px;
 	width:400%;
@@ -107,10 +85,10 @@
 }
 
 @media screen{
-	#chatroom>div#sidebar{
+	#chatroom > div#sidebar{
 		position:fixed;
 	}
-	#chatroom>div#keyboard{
+	#chatroom > div#keyboard{
 		position:fixed;
 	}
 }
