@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'mad_chatter'
-  s.version     = '0.0.8'
+  s.version     = '0.1.0'
   s.date        = '2011-11-11'
   s.summary     = "Mad Chatter is a fun, easy to customize chat server, utilizing HTML 5 Web Sockets"
   s.description = "Mad Chatter is a fun, easy to customize chat server, utilizing HTML 5 Web Sockets"
