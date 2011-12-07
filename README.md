@@ -68,9 +68,7 @@ Please fork and send pull requests! Or submit issues if you have suggestions on 
 ##TODO
 
  - Actually implement the server daemonization mentioned above
- - Provide an example config file
- - Come up with a better approach to configuration/extension
- - Switch from em-websocket to Juggernaut, Socket.io, or Cramp and web-socket-js for better cross-browser support
+ - Add support for alternative web socket servers like Juggernaut, Socket.io, or Cramp and web-socket-js for better cross-browser support
  - Add tests!
 
 ##Copyright

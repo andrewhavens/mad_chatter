@@ -1,0 +1,9 @@
+Mad Chatter
+
+Version 0.1.0
+ - Refactored extension architecture. Much nicer syntax now.
+ - Moved some of the main configuration to a config.yml file (which is generated when you use the 'new' command)
+ - Created skeleton classes for alternative web socket server implementations and moved the default implementation into its own class
+
+Versions < 0.1.0
+ - Some of the features were implemented, but there were many holes that needed to be filled
