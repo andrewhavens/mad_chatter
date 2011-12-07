@@ -21,9 +21,9 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 1.0.0)
-  em-websocket
-  eventmachine (= 0.12.10)
+  em-websocket (~> 0.3.5)
+  eventmachine (~> 0.12.10)
   jeweler (~> 1.6.4)
   rcov
   shoulda
-  thor
+  thor (~> 0.14.6)

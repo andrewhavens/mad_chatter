@@ -1,9 +1,9 @@
 source :rubygems
 
 # Gem dependencies
-gem 'thor'
-gem 'eventmachine', '0.12.10'
-gem 'em-websocket'
+gem 'thor', '~> 0.14.6'
+gem 'eventmachine', '~> 0.12.10'
+gem 'em-websocket', '~> 0.3.5'
 
 # Development dependencies
 group :development do

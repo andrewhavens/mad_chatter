@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+require 'bundler/setup'
 require 'thor'
 require File.expand_path('../../lib/mad_chatter', __FILE__)
 
