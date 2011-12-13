@@ -1,0 +1,5 @@
+Goal: to become an open-source version of https://www.hipchat.com/
+
+TODO:
+Fix 'leave chatroom' functionality
+Fix 'HTML injection' security vulnerability

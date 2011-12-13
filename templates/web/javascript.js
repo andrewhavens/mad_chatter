@@ -90,6 +90,9 @@ var MadChatter = {
 		}
 		if (type == 'message') {
 			MadChatter.display_message(username, message);
+			if (!document.hasFocus) {
+				console.log(window.fluid);
+			}
 		}
 		MadChatter.scroll_to_bottom_of_chat();
 	},

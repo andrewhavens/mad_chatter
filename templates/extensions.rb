@@ -8,6 +8,6 @@
 # Example:
 #
 #   on_message /hey andrew: (.+)/ do |msg|
-#     send_status_message 'Someone sent andrew a chat message'
+#     send_status_message 'Someone is talking to andrew'
 #   end
 #

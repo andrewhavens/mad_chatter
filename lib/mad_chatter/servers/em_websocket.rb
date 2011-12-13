@@ -4,7 +4,7 @@ module MadChatter
   module Servers
     class EventMachineWebSocket
       
-      def initialize(main_server, port)
+      def initialize(port, main_server)
         @main_server = main_server
         @config = {
           :host => '0.0.0.0',

@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
+# lib_dir = File.expand_path('../lib', __FILE__)
+# $:.unshift( lib_dir ) unless $:.include?( lib_dir )
 
-require 'bundler/setup'
 require 'thor'
-require File.expand_path('../../lib/mad_chatter', __FILE__)
 
 module MadChatter
   
@@ -24,8 +24,16 @@ module MadChatter
       copy_file "templates/web/stylesheets/styles.css", "#{name}/web/stylesheets/styles.css"
     end
     
+    desc 'preview', 'Starts both a web server and the Mad Chatter chat server'
+    def preview
+      t1 = Thread.new { require 'mad_chatter/web_server' }
+      t2 = Thread.new { require 'mad_chatter'; MadChatter.start }
+      t2.join()
+    end
+    
     desc 'start', 'Starts the chat server'
     def start
+      require 'mad_chatter'
       MadChatter.start
     end
     
@@ -43,6 +51,7 @@ module MadChatter
     
     desc 'version', 'Displays the current version number'
     def version
+      require "mad_chatter/version"
       puts MadChatter::VERSION
     end
     

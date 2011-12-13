@@ -1,9 +1,14 @@
 Mad Chatter
 
+Version 0.1.1
+ - Added a 'preview' command to CLI to run both a web server and web socket server
+ - Fixed bug where user leaving chatroom didn't notify other users
+
 Version 0.1.0
  - Refactored extension architecture. Much nicer syntax now.
  - Moved some of the main configuration to a config.yml file (which is generated when you use the 'new' command)
  - Created skeleton classes for alternative web socket server implementations and moved the default implementation into its own class
+ - Switched to using Bundler (instead of Jeweler) for gem deployments, thanks to this article: http://mlomnicki.com/ruby/rubygems/2011/01/22/jeweler-vs-bundler.html
 
 Versions < 0.1.0
  - Some of the features were implemented, but there were many holes that needed to be filled

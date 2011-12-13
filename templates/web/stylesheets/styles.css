@@ -53,6 +53,7 @@
 
 #messages p {
 	padding: 0.25em;
+	clear: both;
 }
 
 #messages p.message .username {
