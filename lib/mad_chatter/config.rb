@@ -21,9 +21,9 @@ module MadChatter
         config_file = File.join(Dir.pwd, 'config.yml')
       
         unless File.exist?(config_file)
-          raise 'Could not find Mad Chatter config.yml file'
+          abort 'Could not find Mad Chatter config.yml file'
         end
-      
+        
         config = YAML::load(File.open(config_file))
         defaults = {
           'websocket_backend' => 'websocket-rack',
