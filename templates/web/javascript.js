@@ -90,8 +90,8 @@ var MadChatter = {
 		}
 		if (type == 'message') {
 			MadChatter.display_message(username, message);
-			if (!document.hasFocus) {
-				console.log(window.fluid);
+			if (typeof(MadChatterGrowl) != 'undefined') {
+				MadChatterGrowl.send_(username, message);
 			}
 		}
 		MadChatter.scroll_to_bottom_of_chat();
