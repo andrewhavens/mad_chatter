@@ -1,6 +1,11 @@
 Mad Chatter
 
-Version 0.1.1
+Version 0.2.0
+ - Added a '/clear' command to client-side javascript to be able to clear all chat messages
+ - Fixed HTML injection vulnerability by adding markdown parsing and escaping all incoming html
+ - Created a MacRuby application as a GUI wrapper (still need to add a link to the github repo)
+
+Version 0.1.1-3
  - Added a 'preview' command to CLI to run both a web server and web socket server
  - Fixed bug where user leaving chatroom didn't notify other users
 

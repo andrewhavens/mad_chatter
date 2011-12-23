@@ -18,8 +18,7 @@ module MadChatter
       empty_directory "#{name}/extensions"
       copy_file "templates/web/index.html", "#{name}/web/index.html"
       copy_file "templates/web/javascript.js", "#{name}/web/javascript.js"
-      copy_file "templates/web/stylesheets/reset.css", "#{name}/web/stylesheets/reset.css"
-      copy_file "templates/web/stylesheets/styles.css", "#{name}/web/stylesheets/styles.css"
+      copy_file "templates/web/styles.css", "#{name}/web/styles.css"
     end
     
     desc 'preview', 'Starts both a web server and the Mad Chatter chat server'

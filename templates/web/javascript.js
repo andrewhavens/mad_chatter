@@ -1,15 +1,3 @@
-function get_current_time(){
-	var time = new Date();
-	var hours = time.getHours();
-	var minutes = time.getMinutes();
-	var ampm = 'am';
-	if (hours > 11) { ampm = 'pm'; }
-	if (minutes < 10) { minutes = "0" + minutes; }
-	if (hours == 0) { hours = 12; }
-	if (hours > 12) { hours = hours - 12; }
-	return hours + ':' + minutes + ampm;
-}
-
 var MadChatter = {
 	
 	init: function(ws_host){
@@ -52,7 +40,7 @@ var MadChatter = {
 		var keyboard = $("#keyboard input");
 	    keyboard.keyup(function (event) {
 	      if (event.keyCode == 13) { // The enter key.
-			MadChatter.send_message(keyboard.val());
+					MadChatter.send_message(keyboard.val());
 	        keyboard.val('');
 	      }
 	    });
@@ -109,11 +97,11 @@ var MadChatter = {
 	},
 			
 	display_status: function(message){
-		$("#messages").append("<p class='status'>" + message + "<time>" + get_current_time() + "</time></p>");
+		$("#messages").append("<p class='status'>" + message + "<time>" + MadChatter.get_current_time() + "</time></p>");
 	},
 	
 	display_message: function(username, message){
-		$("#messages").append("<p class='message'><span class='username'>" + username + ":</span> " + message + "<time>" + get_current_time() + "</time></p>");
+		$("#messages").append("<p class='message'><span class='username'>" + username + ":</span> " + message + "<time>" + MadChatter.get_current_time() + "</time></p>");
 	},
 	
 	scroll_to_bottom_of_chat: function(){
@@ -121,11 +109,31 @@ var MadChatter = {
 	},
 	
 	send_message: function(message){
-		MadChatter.send_json('message', message);
+		if (message == '/clear') {
+			MadChatter.clear_messages();
+		} else {
+			MadChatter.send_json('message', message);
+		}
 	},
 	
 	send_json: function(type, msg){
 		var json = { type: type, token: MadChatter.client_token, message: msg };
 		MadChatter.ws.send(JSON.stringify(json));
+	},
+	
+	clear_messages: function(){
+		$('#messages').empty();
+	},
+	
+	get_current_time: function(){
+		var time = new Date();
+		var hours = time.getHours();
+		var minutes = time.getMinutes();
+		var ampm = 'am';
+		if (hours > 11) { ampm = 'pm'; }
+		if (minutes < 10) { minutes = "0" + minutes; }
+		if (hours == 0) { hours = 12; }
+		if (hours > 12) { hours = hours - 12; }
+		return hours + ':' + minutes + ampm;
 	}
 };

@@ -52,7 +52,8 @@ module MadChatter
     def message_received(json)
       msg = JSON.parse(json)
       username = MadChatter::Users.find_username_by_token(msg['token'])
-      message = MadChatter::Message.new(msg['type'], msg['message'], msg['token'], username)
+      puts 'message recieved'
+      message = MadChatter::Message.new(msg['type'], filter_message(msg['message']), msg['token'], username)
       
       if message.token.nil?
         return # Token is required to send messages
@@ -76,6 +77,21 @@ module MadChatter
       rescue RuntimeError
         # dont need to do anything, just prevent any errors from stopping the server
       end
+    end
+    
+    def filter_message(text)
+      puts 'filtering message: ' + text
+      @markdown ||= Redcarpet::Markdown.new(
+        Redcarpet::Render::HTML.new(
+          :filter_html => true, 
+          :hard_wrap => true
+        ), 
+        :autolink => true, 
+        :no_intra_emphasis => true
+      )
+      filtered_text = @markdown.render(text)
+      puts 'filtered: ' + filtered_text
+      filtered_text
     end
     
     def self.send_json(json)
