@@ -52,8 +52,8 @@ module MadChatter
     def message_received(json)
       msg = JSON.parse(json)
       username = MadChatter::Users.find_username_by_token(msg['token'])
-      puts 'message recieved'
       message = MadChatter::Message.new(msg['type'], filter_message(msg['message']), msg['token'], username)
+      puts "message text: #{message.text}"
       
       if message.token.nil?
         return # Token is required to send messages
@@ -80,7 +80,6 @@ module MadChatter
     end
     
     def filter_message(text)
-      puts 'filtering message: ' + text
       @markdown ||= Redcarpet::Markdown.new(
         Redcarpet::Render::HTML.new(
           :filter_html => true, 
@@ -89,9 +88,7 @@ module MadChatter
         :autolink => true, 
         :no_intra_emphasis => true
       )
-      filtered_text = @markdown.render(text)
-      puts 'filtered: ' + filtered_text
-      filtered_text
+      @markdown.render(text).sub!(/\A<p>/,'').sub!(/<\/p>\z/,'') # remove the <p> tags that markdown wraps by default
     end
     
     def self.send_json(json)
