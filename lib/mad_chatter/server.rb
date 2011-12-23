@@ -88,7 +88,10 @@ module MadChatter
         :autolink => true, 
         :no_intra_emphasis => true
       )
-      @markdown.render(text).sub!(/\A<p>/,'').sub!(/<\/p>\z/,'') # remove the <p> tags that markdown wraps by default
+      filtered_text = @markdown.render(text)
+      filtered_text.sub!(/\A<p>/,'')   # remove the opening <p> tag that markdown wraps by default
+      filtered_text.sub!(/<\/p>\z/,'') # remove the closing </p> tag that markdown wraps by default
+      filtered_text
     end
     
     def self.send_json(json)
