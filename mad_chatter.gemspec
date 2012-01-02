@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "eventmachine"
   s.add_runtime_dependency "em-websocket"
   s.add_runtime_dependency "redcarpet"
+  s.add_runtime_dependency "daemons", "1.1.4"
   
   s.add_development_dependency "rspec"
   s.add_development_dependency "shoulda"

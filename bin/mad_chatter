@@ -30,25 +30,22 @@ module MadChatter
     
     desc 'start', 'Starts the chat server'
     def start
-      require 'mad_chatter'
-      MadChatter.start
+      require 'mad_chatter/daemon'
     end
     
     desc 'stop', 'Stops the chat server'
     def stop
-      # stop the currently running daemon
-      # not sure how to best implement this part yet
+      require 'mad_chatter/daemon'
     end
     
     desc 'restart', 'Restarts the chat server'
     def restart
-      # restarts the currently running daemon
-      # not sure how to best implement this part yet
+      require 'mad_chatter/daemon'
     end
     
     desc 'version', 'Displays the current version number'
     def version
-      require "mad_chatter/version"
+      require 'mad_chatter/version'
       puts MadChatter::VERSION
     end
     
