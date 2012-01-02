@@ -110,6 +110,9 @@ table {
 	clear: both;
 }
 
+#messages strong { font-weight: bold; }
+#messages em { font-style: italic; }
+
 #messages p.message .username {
 	font-weight: bold;
 }

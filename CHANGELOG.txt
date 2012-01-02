@@ -1,5 +1,9 @@
 Mad Chatter
 
+Version 0.2.1
+ - Realized the simple extensions aren't actually working. This is why we need tests. :(
+ - Also, fixed some styles that weren't being applied.
+
 Version 0.2.0
  - Added a '/clear' command to client-side javascript to be able to clear all chat messages
  - Fixed HTML injection vulnerability by adding markdown parsing and escaping all incoming html

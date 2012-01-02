@@ -52,7 +52,9 @@ module MadChatter
     def message_received(json)
       msg = JSON.parse(json)
       username = MadChatter::Users.find_username_by_token(msg['token'])
-      message = MadChatter::Message.new(msg['type'], filter_message(msg['message']), msg['token'], username)
+      original_message = msg['message']
+      filtered_message = filter_message(original_message)
+      message = MadChatter::Message.new(msg['type'], filtered_message, msg['token'], username)
       
       if message.token.nil?
         return # Token is required to send messages
@@ -60,9 +62,9 @@ module MadChatter
       
       begin
           MadChatter.simple_extensions.each do |extension|
-          if message.text =~ extension[:regex]
+          if original_message =~ extension[:regex]
             MadChatter::Action.instance_exec do
-              args = extension[:regex].match(message.text).captures
+              args = extension[:regex].match(original_message).captures
               extension[:block].call(args)
             end
           end

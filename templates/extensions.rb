@@ -12,7 +12,8 @@
 #   end
 #
 
-on_message %r{/youtube http://youtu.be/(.*)} do |youtube_id|
-  send_message "<iframe width='560' height='315' src='http://www.youtube.com/embed/#{youtube_id}' frameborder='0' allowfullscreen></iframe>"
-  stop_message_handling
-end
+# this still doesnt work yet. hopefully soon
+# on_message %r{/youtube http://youtu.be/(.*)} do |youtube_id|
+#   send_message "<iframe width='560' height='315' src='http://www.youtube.com/embed/#{youtube_id}' frameborder='0' allowfullscreen></iframe>"
+#   stop_message_handling
+# end
