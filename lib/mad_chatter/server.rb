@@ -53,7 +53,6 @@ module MadChatter
       msg = JSON.parse(json)
       username = MadChatter::Users.find_username_by_token(msg['token'])
       message = MadChatter::Message.new(msg['type'], filter_message(msg['message']), msg['token'], username)
-      puts "message text: #{message.text}"
       
       if message.token.nil?
         return # Token is required to send messages
@@ -89,9 +88,7 @@ module MadChatter
         :no_intra_emphasis => true
       )
       filtered_text = @markdown.render(text)
-      filtered_text.sub!(/\A<p>/,'')   # remove the opening <p> tag that markdown wraps by default
-      filtered_text.sub!(/<\/p>\z/,'') # remove the closing </p> tag that markdown wraps by default
-      filtered_text
+      filtered_text = /^<p>(.*)<\/p>$/.match(filtered_text)[1] # remove the <p> tags that markdown wraps by default
     end
     
     def self.send_json(json)

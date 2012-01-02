@@ -39,9 +39,9 @@ module MadChatter
           MadChatter::Extensions.load_simple_extensions(file_contents)
         end
         
-        Dir[Dir.pwd + '/extensions/*.rb'].each do |file|
-          require file
-        end
+        # Dir[Dir.pwd + '/extensions/*.rb'].each do |file|
+        #   require file
+        # end
       end
       
     end

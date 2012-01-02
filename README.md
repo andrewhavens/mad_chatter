@@ -16,7 +16,7 @@ This command will generate the following structure:
 
     mychatroom/
         config.rb
-        extensions/
+        extensions.rb
         web/
             index.html
             javascript.js
@@ -58,7 +58,7 @@ If you want to customize the html/css of your chatroom, you'll find them in the 
 
 There is an example config file that shows a few examples of things you can customize.
 
-The extensions directory is for you to create your own chat actions. You can add your custom extensions by specifying them in the config file.
+The extensions.rb file is for you to create your own chat extensions. You will find an example in that file.
 
 
 ##Contributing

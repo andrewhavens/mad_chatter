@@ -155,3 +155,11 @@ table {
 	height:100%;
 	overflow:auto;
 }
+
+/* Message Markdown Styles */
+.message pre, .message code {
+	font: 12px 'Bitstream Vera Sans Mono','Courier',monospace;
+	padding: 0!important;
+	background-color: #EEE!important;
+	border: 1px solid #DDD;
+}

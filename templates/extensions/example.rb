@@ -1,5 +1,6 @@
+# I dont think this works anymore
+
 class Example
-  
   # include MadChatter::Extension
   
   def handle(message)
