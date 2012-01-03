@@ -31,7 +31,7 @@ module MadChatter
     def register_connection(&send_message)
       subscriber_id = MadChatter::Server.main_channel.subscribe(send_message)
       token = generate_token
-      send_message.call(MadChatter::Message.new('token', token).to_s)
+      send_message.call(MadChatter::Message.new('token', token).to_json)
       @subscribers[subscriber_id] = token
       subscriber_id
     end
@@ -45,54 +45,31 @@ module MadChatter
       username = MadChatter::Users.find_username_by_token(token)
       MadChatter::Server.main_channel.unsubscribe(id)
       MadChatter::Users.remove(token)
-      MadChatter::Server.send_json(MadChatter::Message.new('status', "#{username} has left the chatroom").to_s)
-      MadChatter::Server.send_json(MadChatter::Message.new('users', MadChatter::Users.current).to_s)
+      MadChatter::Server.send_json(MadChatter::Message.new('status', "#{username} has left the chatroom").to_json)
+      MadChatter::Server.send_json(MadChatter::Message.new('users', MadChatter::Users.current).to_json)
     end
     
     def message_received(json)
       msg = JSON.parse(json)
       username = MadChatter::Users.find_username_by_token(msg['token'])
-      original_message = msg['message']
-      filtered_message = filter_message(original_message)
-      message = MadChatter::Message.new(msg['type'], filtered_message, msg['token'], username)
+      message = MadChatter::Message.new(msg['type'], msg['message'], msg['token'], username)
+      message.filter
       
       if message.token.nil?
         return # Token is required to send messages
       end
       
       begin
-          MadChatter.simple_extensions.each do |extension|
-          if original_message =~ extension[:regex]
-            MadChatter::Action.instance_exec do
-              args = extension[:regex].match(original_message).captures
-              extension[:block].call(args)
-            end
-          end
-        end
-    
-        MadChatter.extension_classes.each do |extension|
-          extension.handle(message)
+        MadChatter.message_listeners.each do |listener|
+          listener.handle(message)
         end
         
-        MadChatter::Server.send_json(message.to_s)
+        MadChatter::Server.send_json(message.to_json)
       rescue RuntimeError
         # dont need to do anything, just prevent any errors from stopping the server
       end
     end
-    
-    def filter_message(text)
-      @markdown ||= Redcarpet::Markdown.new(
-        Redcarpet::Render::HTML.new(
-          :filter_html => true, 
-          :hard_wrap => true
-        ), 
-        :autolink => true, 
-        :no_intra_emphasis => true
-      )
-      filtered_text = @markdown.render(text)
-      filtered_text = /^<p>(.*)<\/p>$/.match(filtered_text)[1] # remove the <p> tags that markdown wraps by default
-    end
-    
+
     def self.send_json(json)
       MadChatter::Server.main_channel.push(json)
     end

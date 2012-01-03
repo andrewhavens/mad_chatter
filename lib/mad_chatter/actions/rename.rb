@@ -1,13 +1,13 @@
 module MadChatter
   module Actions
-    class Rename < MadChatter::Action
+    class Rename < MadChatter::Actions::Base
       
       @@regex = /\/nick (.+)/
       
       def handle(message)
-        if message.text =~ @@regex
+        if message.filtered_text =~ @@regex
           old_username = message.username
-          username = parse_username(message.text)
+          username = parse_username(message.filtered_text)
           MadChatter::Users.update(message.token, username)
           send_status_message "#{old_username} is now known as #{username}"
           send_users_list

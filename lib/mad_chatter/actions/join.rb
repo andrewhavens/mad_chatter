@@ -1,12 +1,12 @@
 module MadChatter
   module Actions
-    class Join < MadChatter::Action
+    class Join < MadChatter::Actions::Base
       
       @@regex = /\/join (.+)/
       
       def handle(message)
-        if message.text =~ @@regex
-          username = parse_username(message.text)
+        if message.filtered_text =~ @@regex
+          username = parse_username(message.filtered_text)
           MadChatter::Users.update(message.token, username)
           send_status_message "#{username} has joined the chatroom"
           send_users_list

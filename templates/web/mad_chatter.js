@@ -74,7 +74,7 @@ var MadChatter = {
 			MadChatter.display_status(message);
 		}
 		if (type == 'action') {
-			MadChatter.run_action(message);
+			MadChatter.exec_action(message);
 		}
 		if (type == 'message') {
 			MadChatter.display_message(username, message);
@@ -92,8 +92,8 @@ var MadChatter = {
 		});
 	},
 
-	run_action: function(action){
-		eval(action);
+	exec_action: function(message){
+		window[message.function].apply(window, message.args);
 	},
 			
 	display_status: function(message){

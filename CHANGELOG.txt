@@ -1,5 +1,8 @@
 Mad Chatter
 
+Version 0.2.3
+ - Finally got extensions working by refactoring a bunch of stuff
+
 Version 0.2.2
  - Added daemonization so you can start, stop, restart Mad Chatter
 
