@@ -17,7 +17,8 @@ module MadChatter
       copy_file "templates/extensions.rb", "#{name}/extensions.rb"
       # empty_directory "#{name}/extensions"
       copy_file "templates/web/index.html", "#{name}/web/index.html"
-      copy_file "templates/web/javascript.js", "#{name}/web/javascript.js"
+      copy_file "templates/web/mad_chatter.js", "#{name}/web/mad_chatter.js"
+      copy_file "templates/web/mad_chatter_actions.js", "#{name}/web/mad_chatter_actions.js"
       copy_file "templates/web/styles.css", "#{name}/web/styles.css"
     end
     
