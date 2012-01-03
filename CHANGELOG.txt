@@ -1,5 +1,8 @@
 Mad Chatter
 
+Version 0.2.5
+ - Adjusted daemonization process
+
 Version 0.2.4
  - Minor update (forgot I changed some filename)
 

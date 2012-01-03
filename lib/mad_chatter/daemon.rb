@@ -10,7 +10,10 @@ options = {
   :monitor    => true
 }
 
+require 'mad_chatter'
+config = MadChatter::Config.init
+server = MadChatter::Server.new(config)
+
 Daemons.run_proc('Mad Chatter', options) do
-  require 'mad_chatter'
-  MadChatter.start
+  server.start
 end
