@@ -19,4 +19,11 @@ end
 
 on_message %r{/alert (.*)} do |alert_message|
   send_action 'show_alert', alert_message
+  stop_message_handling
+end
+
+on_message %r{/earthquake} do
+  send_status_message 'Someone has just caused an earthquake!'
+  send_action 'earthquake'
+  stop_message_handling
 end
