@@ -67,9 +67,8 @@ Please fork and send pull requests! Or submit issues if you have suggestions on 
 
 ##TODO
 
- - Actually implement the server daemonization mentioned above
  - Add support for alternative web socket servers like Juggernaut, Socket.io, or Cramp and web-socket-js for better cross-browser support
- - Add tests!
+ - Add tests! (I'm new to this, so I need help)
 
 ##Copyright
 
