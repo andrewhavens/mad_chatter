@@ -23,7 +23,10 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "em-websocket"
   s.add_runtime_dependency "redcarpet"
   s.add_runtime_dependency "daemons", "1.1.4"
-  
+
   s.add_development_dependency "rspec"
   s.add_development_dependency "shoulda"
+  s.add_development_dependency 'guard'
+  s.add_development_dependency 'guard-rspec'
+  s.add_development_dependency 'simplecov'
 end
