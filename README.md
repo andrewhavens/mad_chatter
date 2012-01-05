@@ -33,7 +33,6 @@ The start command will launch the web socket server in the background. You can u
 
     mad_chatter stop
 
-
 ## Chat Actions
 
 Hopefully, the default chatroom will be relatively intuitive to use. However, there are some extra features that Mad Chatter provides. Every chat message is parsed to see if it is a normal chat message, or if its a special action. These actions are much like IRC commands. For example, if I wanted to change my screen name from Andrew to Andy I could chat this message:
@@ -62,6 +61,13 @@ If you want to customize the html/css of your chatroom, you'll find it in the we
 There is an example config file that shows a few examples of things you can customize.
 
 The extensions.rb file is for you to create your own chat extensions. You will find a few examples in that file.
+
+
+## Mac, Windows, and Linux Wrappers
+
+Once you've got your chat server running and being used by other people, you might be interested in using/distributing an installable application, so you can leave it running and don't need to pull it up in a browser anymore. Here's a list of the currently available GUI wrapper applications:
+
+ * [Mad Chatter for Mac](https://github.com/andrewhavens/mad_chatter_for_mac) (a MacRuby app based on WebKit)
 
 ## Getting Help
 
