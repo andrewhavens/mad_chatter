@@ -1,8 +1,8 @@
-#Mad Chatter
+# Mad Chatter
 
-Mad Chatter is a fun, easy to customize chat server. It's written in Ruby and utilizes HTML 5 Web Sockets for fast communication.
+Mad Chatter is a fun, easy to customize chat server. It's written in Ruby and utilizes HTML 5 Web Sockets for fast communication. It also has support for Markdown.
 
-##Getting Started
+## Getting Started
 
 To get started, first install the Mad Chatter gem:
 
@@ -19,10 +19,9 @@ This command will generate the following structure:
         extensions.rb
         web/
             index.html
-            javascript.js
-            stylesheets/
-                reset.css
-                styles.css
+            styles.css
+            mad_chatter.js
+            mad_chatter_actions.js
 
 To start your chat server, navigate to the directory that was just created and run...
 
@@ -35,7 +34,7 @@ The start command will launch the web socket server in the background. You can u
     mad_chatter stop
 
 
-##Chat Actions
+## Chat Actions
 
 Hopefully, the default chatroom will be relatively intuitive to use. However, there are some extra features that Mad Chatter provides. Every chat message is parsed to see if it is a normal chat message, or if its a special action. These actions are much like IRC commands. For example, if I wanted to change my screen name from Andrew to Andy I could chat this message:
 
@@ -47,29 +46,36 @@ If I wanted to embed a YouTube video for all the members of the chatroom to enjo
 
     /youtube http://youtu.be/n1NVfDlU6yQ
 
-You can even create your own actions to do whatever you want.
+Or if I wanted to shake everyone's chat window:
+
+    /earthquake
+
+You can also create your own actions to do whatever you want.
 
 
-##Customizing
+## Customizing
 
 The goal of Mad Chatter is to make it easy to create, host, and customize your own chat server. Let's take a look at the different ways you can customize your new chat server.
 
-If you want to customize the html/css of your chatroom, you'll find them in the web directory.
+If you want to customize the html/css of your chatroom, you'll find it in the web directory.
 
 There is an example config file that shows a few examples of things you can customize.
 
-The extensions.rb file is for you to create your own chat extensions. You will find an example in that file.
+The extensions.rb file is for you to create your own chat extensions. You will find a few examples in that file.
 
+## Getting Help
 
-##Contributing
+Feel free to submit a GitHub issue, or post to the [Google Group](https://groups.google.com/group/mad-chatter), or send me a message on GitHub.
+
+## Contributing
 
 Please fork and send pull requests! Or submit issues if you have suggestions on how to improve.
 
-##TODO
+## TODO
 
- - Add support for alternative web socket servers like Juggernaut, Socket.io, or Cramp and web-socket-js for better cross-browser support
+ - Maybe add support for alternative web socket servers like Juggernaut, Socket.io, or Cramp and web-socket-js
  - Add tests! (I'm new to this, so I need help)
 
 ##Copyright
 
-Copyright (c) 2011 Andrew Havens. See LICENSE.txt for further details.
+Copyright (c) 2011-2012 Andrew Havens. MIT license. See LICENSE.txt for further details.
