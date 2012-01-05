@@ -7,6 +7,7 @@
 	<script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js'></script>
 	<script src='mad_chatter.js'></script>
 	<script src='mad_chatter_actions.js'></script>
+	<script src='mad_chatter_config.js'></script>
 	
 	<!-- markItUp! -->
 	<script type="text/javascript" src="markitup/jquery.markitup.js"></script>
@@ -16,7 +17,7 @@
 	
 	<script>
 		$(document).ready(function(){
-			MadChatter.init('ws://localhost:8100');
+			MadChatter.init(mad_chatter_config);
 			$('#keyboard textarea').markItUp(mySettings);
 		});
 	</script>

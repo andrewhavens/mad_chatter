@@ -1,0 +1,1 @@
+var mad_chatter_config = 'ws://localhost:8100';
