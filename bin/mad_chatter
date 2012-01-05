@@ -15,11 +15,7 @@ module MadChatter
     def new(name)
       copy_file "templates/config.yml", "#{name}/config.yml"
       copy_file "templates/extensions.rb", "#{name}/extensions.rb"
-      # empty_directory "#{name}/extensions"
-      copy_file "templates/web/index.html", "#{name}/web/index.html"
-      copy_file "templates/web/mad_chatter.js", "#{name}/web/mad_chatter.js"
-      copy_file "templates/web/mad_chatter_actions.js", "#{name}/web/mad_chatter_actions.js"
-      copy_file "templates/web/styles.css", "#{name}/web/styles.css"
+      directory "templates/web", "#{name}/web"
     end
     
     desc 'preview', 'Starts both a web server and the Mad Chatter chat server'
