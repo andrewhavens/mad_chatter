@@ -69,9 +69,11 @@ Once you've got your chat server running and being used by other people, you mig
 
  * [Mad Chatter for Mac](https://github.com/andrewhavens/mad_chatter_for_mac) (a MacRuby app based on WebKit)
 
-## Getting Help
+## Getting Help / Providing Feedback
 
 Feel free to submit a GitHub issue, or post to the [Google Group](https://groups.google.com/group/mad-chatter), or send me a message on GitHub.
+
+You can also vote on upcoming features: https://madchatter.uservoice.com
 
 ## Contributing
 

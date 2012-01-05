@@ -26,7 +26,10 @@ module MadChatter
     
     def filter
       @filtered_text = MadChatter.markdown.render(@original_text)
-      @filtered_text = /^<p>(.*)<\/p>$/.match(@filtered_text)[1] # remove the <p> tags that markdown wraps by default
+      # remove the <p> tags that markdown wraps by default
+      @filtered_text.sub!(/^<p>/, '')
+      @filtered_text.sub!(/<\/p>$/, '')
+      @filtered_text
     end
     
   end

@@ -17,6 +17,11 @@ describe MadChatter::Message do
     it 'should remove <p> tags' do
       message.filter.should_not match /<[\s\\]*p[\s]*>/
     end
+    
+    it 'should be able to handle messages made of empty space' do
+      message = MadChatter::Message.new('message', "    ")
+      message.filter.should match ''
+    end
   end
 
 end

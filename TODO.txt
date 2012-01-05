@@ -1,4 +1,4 @@
-Goal: to become an open-source version of https://www.hipchat.com/
+Goal: to become an open-source version of https://www.hipchat.com/ or https://www.flowdock.com
 
 TODO:
 
