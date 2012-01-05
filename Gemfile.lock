@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    mad_chatter (0.2.5)
+    mad_chatter (0.2.6)
       daemons (= 1.1.4)
       em-websocket
       eventmachine
