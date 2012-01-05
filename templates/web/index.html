@@ -7,9 +7,17 @@
 	<script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js'></script>
 	<script src='mad_chatter.js'></script>
 	<script src='mad_chatter_actions.js'></script>
+	
+	<!-- markItUp! -->
+	<script type="text/javascript" src="markitup/jquery.markitup.js"></script>
+	<script type="text/javascript" src="markitup/sets/markdown/set.js"></script>
+	<link rel="stylesheet" type="text/css" href="markitup/skins/mad_chatter/style.css" />
+	<link rel="stylesheet" type="text/css" href="markitup/sets/markdown/style.css" />
+	
 	<script>
 		$(document).ready(function(){
 			MadChatter.init('ws://localhost:8100');
+			$('#keyboard textarea').markItUp(mySettings);
 		});
 	</script>
   </head>
@@ -31,7 +39,8 @@
 			<ul id="members"></ul>
 		</div>
 		<div id="keyboard">
-			<input type="text">
+			<!-- <input type="text"> -->
+			<textarea></textarea>
 		</div>
 		<div id="messages"></div>
 	</div>

@@ -128,12 +128,12 @@ table {
 }
 
 #keyboard {
-	bottom:0;
-	left:220px;
-	width:400%;
-	height:50px;
+	bottom: 0;
+	left: 220px;
+	width: 100%;
+/*	height:50px;*/
 	background-color: #eee;
-	padding: 10px 0 0 20px;
+	padding: 0 10px;
 }
 
 #keyboard input {
@@ -142,12 +142,8 @@ table {
 }
 
 @media screen{
-	#chatroom > div#sidebar{
-		position:fixed;
-	}
-	#chatroom > div#keyboard{
-		position:fixed;
-	}
+	#chatroom > div#sidebar  { position:fixed; }
+	#chatroom > div#keyboard { position:fixed; }
 }
 
 * html #chatroom{

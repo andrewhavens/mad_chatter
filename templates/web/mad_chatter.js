@@ -37,10 +37,10 @@ var MadChatter = {
 	},
 	
 	wait_for_chat_submit: function(){
-		var keyboard = $("#keyboard input");
+		var keyboard = $("#keyboard textarea");
 	    keyboard.keyup(function (event) {
 	      if (event.keyCode == 13) { // The enter key.
-					MadChatter.send_message(keyboard.val());
+			MadChatter.send_message(keyboard.val());
 	        keyboard.val('');
 	      }
 	    });
