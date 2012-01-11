@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    mad_chatter (0.2.6)
+    mad_chatter (0.2.7)
       daemons (= 1.1.4)
       em-websocket
       eventmachine
@@ -23,6 +23,7 @@ GEM
     guard-rspec (0.5.10)
       guard (>= 0.8.4)
     multi_json (1.0.4)
+    rb-fsevent (0.4.3.1)
     redcarpet (2.0.1)
     rspec (2.7.0)
       rspec-core (~> 2.7.0)
@@ -32,6 +33,7 @@ GEM
     rspec-expectations (2.7.0)
       diff-lcs (~> 1.1.2)
     rspec-mocks (2.7.0)
+    ruby-growl (3.0)
     shoulda (2.11.3)
     simplecov (0.5.4)
       multi_json (~> 1.0.3)
@@ -46,6 +48,8 @@ DEPENDENCIES
   guard
   guard-rspec
   mad_chatter!
+  rb-fsevent
   rspec
+  ruby-growl
   shoulda
   simplecov

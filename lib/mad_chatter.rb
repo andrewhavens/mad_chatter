@@ -15,6 +15,7 @@ module MadChatter
   
   require 'mad_chatter/config'
   require 'mad_chatter/message'
+  require 'mad_chatter/message_history'
   require 'mad_chatter/server'
   require 'mad_chatter/users'
   require 'mad_chatter/version'

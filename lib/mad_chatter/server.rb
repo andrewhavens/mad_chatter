@@ -33,6 +33,9 @@ module MadChatter
       token = generate_token
       send_message.call(MadChatter::Message.new('token', token).to_json)
       @subscribers[subscriber_id] = token
+      MadChatter::MessageHistory.all.each do |json|
+        send_message.call(json)
+      end
       subscriber_id
     end
     
@@ -72,6 +75,7 @@ module MadChatter
 
     def self.send_json(json)
       MadChatter::Server.main_channel.push(json)
+      MadChatter::MessageHistory.add(json)
     end
     
   end
