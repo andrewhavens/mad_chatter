@@ -48,9 +48,8 @@ table {
 	border-spacing: 0;
 }
 
-/*
- * Mad Chatter Styles
- */
+
+/***************** Mad Chatter Styles *****************/
 
 #login_screen header {
 	padding: 150px 0 20px;
@@ -131,7 +130,6 @@ table {
 	bottom: 0;
 	left: 220px;
 	width: 100%;
-/*	height:50px;*/
 	background-color: #eee;
 	padding: 0 10px;
 }
@@ -155,10 +153,8 @@ table {
 	overflow:auto;
 }
 
-/* Message Markdown Styles */
-.message pre, .message code {
+pre, code {
 	font: 12px 'Bitstream Vera Sans Mono','Courier',monospace;
-	padding: 0!important;
-	background-color: #EEE!important;
-	border: 1px solid #DDD;
+	padding: 2px !important;
+	background-color: #EEE !important;
 }

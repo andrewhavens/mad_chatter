@@ -2,23 +2,23 @@
 <html>
   <head>
 	<title>Mad Chatter</title>
-	<link rel="stylesheet" href="styles.css">
     <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js'></script>
 	<script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js'></script>
+	
+	<!-- markdown editor -->
+	<script type="text/javascript" src="markitup/jquery.markitup.js"></script>
+	<link rel="stylesheet" type="text/css" href="markitup/skins/mad_chatter/style.css" />
+	<link rel="stylesheet" type="text/css" href="markitup/sets/markdown/style.css" />
+	
+	<!-- Mad Chatter -->
 	<script src='mad_chatter.js'></script>
 	<script src='mad_chatter_actions.js'></script>
 	<script src='mad_chatter_config.js'></script>
-	
-	<!-- markItUp! -->
-	<script type="text/javascript" src="markitup/jquery.markitup.js"></script>
-	<script type="text/javascript" src="markitup/sets/markdown/set.js"></script>
-	<link rel="stylesheet" type="text/css" href="markitup/skins/mad_chatter/style.css" />
-	<link rel="stylesheet" type="text/css" href="markitup/sets/markdown/style.css" />
+	<link rel="stylesheet" href="styles.css">
 	
 	<script>
 		$(document).ready(function(){
 			MadChatter.init(mad_chatter_config);
-			$('#keyboard textarea').markItUp(mySettings);
 		});
 	</script>
   </head>

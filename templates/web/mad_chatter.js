@@ -8,7 +8,7 @@ var MadChatter = {
 		MadChatter.init_websocket(ws_host);
 		$('#chatroom').hide();
 		MadChatter.wait_for_join();
-		MadChatter.wait_for_chat_submit();
+		MadChatter.add_markdown_editor();
 	},
 	
 	init_websocket: function(ws_host){
@@ -36,14 +36,23 @@ var MadChatter = {
 		});
 	},
 	
-	wait_for_chat_submit: function(){
-		var keyboard = $("#keyboard textarea");
-	    keyboard.keyup(function (event) {
-	      if (event.keyCode == 13) { // The enter key.
-			MadChatter.send_message(keyboard.val());
-	        keyboard.val('');
-	      }
-	    });
+	add_markdown_editor: function(){
+		var config = {
+			previewParserPath: '',
+			onEnter: {keepDefault:false, afterInsert: MadChatter.submit_chat },
+			onShiftEnter: {keepDefault:false, openWith:'\n\n'},
+			markupSet: [	
+				{name:'Bold', key:'B', openWith:'**', closeWith:'**'},
+				{name:'Italic', key:'I', openWith:'_', closeWith:'_'},
+				{separator:'---------------' },
+				{name:'Picture', key:'P', replaceWith:'![[![Alternative text]!]]([![Url:!:http://]!])'},
+				{name:'Link', key:'L', openWith:'[', closeWith:']([![Url:!:http://]!])', placeHolder:'Your text to link here...' },
+				{separator:'---------------'},	
+				{name:'Quotes', openWith:'> '},
+				{name:'Code Block / Code', openWith:'(!(\t|!|`)!)', closeWith:'(!(`)!)'}
+			]
+		};
+		$('#keyboard textarea').markItUp(config);
 	},
 	
 	join_chat: function(){
@@ -55,6 +64,14 @@ var MadChatter = {
 		MadChatter.send_message('/join ' + username);
 		$('#login_screen').hide();
 		$('#chatroom').show();
+	},
+	
+	submit_chat: function(){
+		var keyboard = $("#keyboard textarea"), message = keyboard.val();
+		if ($.trim(message) != '') {
+			MadChatter.send_message(message);
+			keyboard.val('');
+		}
 	},
 	
 	message_received: function(type, username, message){
@@ -101,7 +118,7 @@ var MadChatter = {
 	},
 	
 	display_message: function(username, message){
-		$("#messages").append("<p class='message'><span class='username'>" + username + ":</span> " + message + "<time>" + MadChatter.get_current_time() + "</time></p>");
+		$("#messages").append("<p class='message'><time>" + MadChatter.get_current_time() + "</time><span class='username'>" + username + ":</span> " + message + "</p>");
 	},
 	
 	scroll_to_bottom_of_chat: function(){
