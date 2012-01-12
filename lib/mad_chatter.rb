@@ -16,6 +16,7 @@ module MadChatter
   require 'mad_chatter/config'
   require 'mad_chatter/message'
   require 'mad_chatter/message_history'
+  require 'mad_chatter/markdown_renderer'
   require 'mad_chatter/server'
   require 'mad_chatter/users'
   require 'mad_chatter/version'
@@ -27,14 +28,15 @@ module MadChatter
   require 'mad_chatter/servers/em_websocket'
   
   def self.markdown
-    @markdown ||= Redcarpet::Markdown.new(
-      Redcarpet::Render::HTML.new(
-        :filter_html => true, 
-        :hard_wrap => true
-      ), 
+    redcarpet_config = {
       :autolink => true, 
       :no_intra_emphasis => true
-    )
+    }
+    renderer_config = {
+      :filter_html => true, 
+      :hard_wrap => true
+    }
+    @markdown ||= Redcarpet::Markdown.new(MadChatter::MarkdownRenderer.new(renderer_config), redcarpet_config)
   end
 
   def self.start

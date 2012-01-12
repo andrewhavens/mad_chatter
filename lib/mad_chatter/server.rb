@@ -75,7 +75,6 @@ module MadChatter
 
     def self.send_json(json)
       MadChatter::Server.main_channel.push(json)
-      MadChatter::MessageHistory.add(json)
     end
     
   end

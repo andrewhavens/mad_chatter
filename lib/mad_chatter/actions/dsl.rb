@@ -18,13 +18,15 @@ module MadChatter
       end
     
       def send_message(text)
-        message = MadChatter::Message.new('message', text)
-        send_json(message.to_json)
+        json = MadChatter::Message.new('message', text).to_json
+        send_json(json)
+        MadChatter::MessageHistory.add(json)
       end
     
       def send_status_message(text)
-        message = MadChatter::Message.new('status', text)
-        send_json(message.to_json)
+        json = MadChatter::Message.new('status', text).to_json
+        send_json(json)
+        MadChatter::MessageHistory.add(json)
       end
     
       def send_users_list

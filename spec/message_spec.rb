@@ -20,7 +20,12 @@ describe MadChatter::Message do
     
     it 'should be able to handle messages made of empty space' do
       message = MadChatter::Message.new('message', "    ")
-      message.filter.should match ''
+      message.filter.should == ''
+    end
+    
+    it 'should set links to target="_blank"' do
+      message = MadChatter::Message.new('message', "[link me up](http://www.example.com)")
+      message.filter.should match %r{<a target="_blank" href="http://www.example.com">link me up</a>}
     end
   end
 
