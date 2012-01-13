@@ -16,7 +16,7 @@ var MadChatter = {
 		ws.onopen = function(){};
 		ws.onclose = function(){
 			MadChatter.display_status('You have been disconnected');
-			setTimeout('("MadChatter.reconnect('+ws_host+'")', 10000);
+			// setTimeout('("MadChatter.reconnect('+ws_host+'")', 10000); //need to figure out how to re-join chat onopen
 		};
 		ws.onmessage = function(evt){
 			//console.log(evt.data)
@@ -26,9 +26,9 @@ var MadChatter = {
 		MadChatter.ws = ws;
 	},
 	
-	reconnect: function(){
-		console.log('trying to reconnect...');
-	},
+	// reconnect: function(){
+	// 	console.log('trying to reconnect...');
+	// },
 	
 	wait_for_join: function(){
 		$('#username').keyup(function (event) {
