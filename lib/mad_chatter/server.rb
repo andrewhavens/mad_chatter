@@ -67,10 +67,17 @@ module MadChatter
           listener.handle(message)
         end
         
-        MadChatter::Server.send_json(message.to_json)
+        MadChatter::Server.send_message(message)
+        
       rescue RuntimeError
         # dont need to do anything, just prevent any errors from stopping the server
       end
+    end
+    
+    def self.send_message(message)
+      json = message.to_json
+      MadChatter::Server.send_json(json)
+      MadChatter::MessageHistory.add(json) if ['message','status'].include? message.type
     end
 
     def self.send_json(json)
