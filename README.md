@@ -82,7 +82,6 @@ Please fork and send pull requests! Or submit issues if you have suggestions on 
 ## TODO
 
  - Maybe add support for alternative web socket servers like Juggernaut, Socket.io, or Cramp and web-socket-js
- - Add tests! (I'm new to this, so I need help)
 
 ##Copyright
 
