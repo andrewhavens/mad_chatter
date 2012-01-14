@@ -34,8 +34,8 @@ This will start up the Mad Chatter chat server as well as a simple web server fo
 When you're ready to have other people use your chat server (friends, family, co-workers, etc) you'll want to host the server and web directory some place that they can access (on a web server, for example, if it will be used outside your local network). You'll also want to start the chat server and leave it running for a long time in the background. This is known as a "daemon". Here are a few useful commands for that:
 
     mad_chatter start
-		mad_chatter stop
-		mad_chatter restart
+    mad_chatter stop
+    mad_chatter restart
 
 ## Chat Actions
 
