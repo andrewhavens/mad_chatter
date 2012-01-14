@@ -19,7 +19,7 @@ Then generate the directory where your chat application will live:
 This command will generate the following structure:
 
     mychatroom/
-        config.rb       # for general configuration
+        config.yml      # for general configuration
         extensions.rb   # for writing your own extensions
         web/            # all of the html, css, and javascript live here
 
