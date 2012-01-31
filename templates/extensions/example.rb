@@ -1,4 +1,4 @@
-# I dont think this works anymore
+# this definitely doesnt work anymore
 
 class Example
   # include MadChatter::Extension
