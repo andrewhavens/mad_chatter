@@ -1,14 +1,30 @@
 module MadChatter
   class Message
     
-    attr_accessor :type, :original_text, :filtered_text, :token, :username
+    attr_accessor :type, :original_text, :filtered_text, :html, :token, :channel, :growl, :add_to_history
     
-    def initialize(type, original_text, token = nil, username = nil)
+    def initialize(type, text, token = nil, channel = nil)
       @type = type
-      @original_text = original_text
-      @filtered_text = original_text  # if filter is never called, message will be original text
+      @original_text = text
+      @filtered_text = filter(text)
+      @html = @filtered_text
       @token = token
+      @channel = channel
+      @growl = text
+      @add_to_history = true
+    end
+    
+    def username=(username)
       @username = username
+    end
+    
+    def username
+      unless @username
+        MadChatter.users.each do |user|
+          @username = user.username if user.has_token?(@token)
+        end
+      end
+      @username
     end
     
     # Helper method for returning filtered text.
@@ -19,17 +35,19 @@ module MadChatter
     def to_json
       JSON.generate({
         type: @type,
-        message: @filtered_text,
-        username: @username,
+        text: @original_text,
+        html: @html,
+        username: username,
+        growl: @growl,
       })
     end
     
-    def filter
-      @filtered_text = MadChatter.markdown.render(@original_text)
-      # remove the <p> tags that markdown wraps by default
-      @filtered_text.sub!(/^<p>/, '')
-      @filtered_text.sub!(/<\/p>$/, '')
-      @filtered_text
+    def filter(text)
+      CGI::escapeHTML(text).strip
+    end
+    
+    def add_to_history?
+      @add_to_history
     end
     
   end

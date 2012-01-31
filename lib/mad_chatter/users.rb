@@ -1,31 +1,39 @@
 module MadChatter
   class Users
     
-    class << self
-      
-      def users
-        @users ||= {}
-      end
+    def initialize
+      @users = {}
+    end
+
+    def add(token, username = nil)
+      @users[token] = username
+    end
+        
+    def update(token, username)
+      @users[token] = username
+    end
     
-      def update(token, username)
-        MadChatter::Users.users[token] = username
-      end
-      
-      def remove(token)
-        MadChatter::Users.users.delete(token)
-      end
-      
-      def find_username_by_token(token)
-        MadChatter::Users.users[token]
-      end
-      
-      def current
-        MadChatter::Users.users.values
-      end
-      
-      def token_exists?(token)
-        MadChatter::Users.users[token].exists?
-      end
+    def remove(token)
+      @users.delete(token)
+    end
+    
+    def find_username_by_token(token)
+      @users[token]
+    end
+    
+    def current
+      @users.values
+    end
+    
+    def token_exists?(token)
+      @users[token].exists?
+    end
+    
+    def to_json
+      JSON.generate({
+        type: 'users',
+        json: current,
+      })
     end
     
   end
