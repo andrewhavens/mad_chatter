@@ -25,7 +25,7 @@ module MadChatter
         simple_extensions_file = File.join(Dir.pwd, 'extensions.rb')
         if File.exist?(simple_extensions_file)
           file_contents = File.read(simple_extensions_file)
-          MadChatter::Extensions.instance_eval file_contents
+          # MadChatter::Extensions.module_eval file_contents
         end
         
         # Dir[Dir.pwd + '/extensions/*.rb'].each do |file|

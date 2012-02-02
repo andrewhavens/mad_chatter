@@ -1,9 +1,10 @@
 module MadChatter
   class Channel
 
-    attr_accessor :name, :users, :message_history
+    attr_accessor :id, :name, :users, :message_history
 
     def initialize(name = nil)
+      @id = MadChatter.channels.count
       @name = name
       @users = []
       # @users = MadChatter::Users.new

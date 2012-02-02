@@ -2,14 +2,16 @@
 <html>
   <head>
 	<title>Mad Chatter</title>
-    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js'></script>
-	<script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js'></script>
+  <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
+	<!-- <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js'></script> -->
 	
 	<!-- markdown editor -->
+<!--
 	<script type="text/javascript" src="markitup/jquery.markitup.js"></script>
 	<link rel="stylesheet" type="text/css" href="markitup/skins/mad_chatter/style.css" />
 	<link rel="stylesheet" type="text/css" href="markitup/sets/markdown/style.css" />
-	
+-->
+
 	<!-- Mad Chatter -->
 	<script src='mad_chatter.js'></script>
 	<script src='mad_chatter_actions.js'></script>
@@ -33,20 +35,44 @@
 			<input id="username" type="text"> <button id="join">Join</button>
 		</div>
 	</div>
+	
+	<div id="chat_wrapper">
 		
-	<div id="chatroom">
-		<div id="sidebar">
-			<h2>Members</h2>
-			<ul id="members"></ul>
-			<footer>
-				
-			</footer>
+		<ul id="tabs">
+			<li class="active"><a href="#">Lobby</a></li>
+		</ul>
+		
+		<div id="lobby">
+			<h2>Rooms</h2>
+			<ul id="channels"></ul>
 		</div>
-		<div id="keyboard">
-			<textarea></textarea>
+		
+		<!-- template -->
+		<div id="room_template" class="room" style="display:none">
+			<div class="sidebar">
+				<h2>People</h2>
+				<ul class="users"></ul>
+				<!--
+				<footer>
+					<a id="feature-request" href="javascript:UserVoice.showPopupWidget();">Request a Feature</a>
+				</footer>
+				-->
+			</div>
+			<div class="messages"></div>
+			<div class="new_message"><input type="text"></input></div>
 		</div>
-		<div id="messages"></div>
+		
 	</div>
-		
+	
+	<!--
+	<script type="text/javascript">
+	  var uvOptions = {};
+	  (function() {
+	    var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
+	    uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/jE0kfvAFzhwXmLpjSlg.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
+	  })();
+	</script>
+	-->
   </body>
 </html>

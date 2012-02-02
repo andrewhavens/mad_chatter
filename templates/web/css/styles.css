@@ -59,28 +59,33 @@ table {
 	font: 25px Verdana, Geneva, Arial, Helvetica, sans-serif;
 }
 
-#pick_a_username {
+#login_screen #pick_a_username {
 	text-align: center;
 	background: #fff;
 	padding: 5px 10px 10px;
 	font: 18px Verdana, Geneva, Arial, Helvetica, sans-serif;
 }
 
-#pick_a_username p {
+#login_screen #pick_a_username p {
 	margin: 10px;
 }
-#pick_a_username input, #pick_a_username button {
+#login_screen #pick_a_username input, #login_screen #pick_a_username button {
 	font: 14px Verdana, Geneva, Arial, Helvetica, sans-serif;
 	padding: 5px;
 }
 
-#chatroom{
+#chat_wrapper {
 	margin:0;
 	padding:0 0 100px 200px;
 	font: 12px Verdana, Geneva, Arial, Helvetica, sans-serif;
 }
 
-#sidebar{
+#chat_wrapper ul#tabs {
+	float: left;
+	background: green;
+}
+
+#chat_wrapper .sidebar{
 	position:absolute;
 	top:0;
 	left:0;
@@ -91,42 +96,43 @@ table {
 	padding: 20px 5px 0 15px;
 }
 
-#sidebar h2 {
+#chat_wrapper .sidebar h2 {
 	font: 14px Verdana, Geneva, Arial, Helvetica, sans-serif;
 	margin-bottom: 10px;
 }
 
-#sidebar ul#members li {
+#chat_wrapper .room ul.users li {
 	margin-left: 1em;
 }
 
-#messages {
+#chat_wrapper .room .messages {
 	padding: 20px 10px 0px 40px;
 }
 
-#messages p {
+#chat_wrapper .room .messages p {
 	padding: 0.25em;
 	clear: both;
 }
 
-#messages strong { font-weight: bold; }
-#messages em { font-style: italic; }
+#chat_wrapper .room .messages strong { font-weight: bold; }
+#chat_wrapper .room .messages em { font-style: italic; }
 
-#messages p.message .username {
+#chat_wrapper .room .messages p.message .username {
 	font-weight: bold;
 }
 
-#messages p.message time, #messages p.status time {
+#chat_wrapper .room .messages p.message time, 
+#chat_wrapper .room .messages p.status time {
 	float: right;
 	color: #999;
 }
 
-#messages p.status {
+#chat_wrapper .room .messages p.status {
 	text-align: center;
 	color: #999;
 }
 
-#keyboard {
+#chat_wrapper .room .new_message {
 	bottom: 0;
 	left: 220px;
 	width: 100%;
@@ -134,21 +140,21 @@ table {
 	padding: 0 10px;
 }
 
-#keyboard input {
+#chat_wrapper .room .new_message input {
 	width: 15%;
 	padding: 5px;
 }
 
 @media screen{
-	#chatroom > div#sidebar  { position:fixed; }
-	#chatroom > div#keyboard { position:fixed; }
+	#chat_wrapper .sidebar  { position:fixed; }
+	#chat_wrapper .room .new_message { position:fixed; }
 }
 
-* html #chatroom{
+* html #chat_wrapper {
 	overflow:hidden;
 } 
 
-* html div#messages{
+* html #chat_wrapper .room .messages {
 	height:100%;
 	overflow:auto;
 }

@@ -1,3 +1,5 @@
+require 'cgi'
+
 module MadChatter
   class Message
     
@@ -38,6 +40,7 @@ module MadChatter
         text: @original_text,
         html: @html,
         username: username,
+        channel: @channel,
         growl: @growl,
       })
     end

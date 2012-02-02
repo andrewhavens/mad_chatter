@@ -18,9 +18,12 @@ module MadChatter
     
     def connected
       # subscriber_id = MadChatter::Server.main_channel.subscribe(send_message)
+      
       @token = generate_new_token unless @token
-      send MadChatter::Message.new('token', @token).to_json
       MadChatter.users << self
+      send_token
+      send_channels
+      
       # @subscribers[subscriber_id] = token
       # MadChatter::MessageHistory.all.each do |json|
       #   send_message.call(json)
@@ -32,12 +35,29 @@ module MadChatter
       Digest::SHA1.hexdigest(Time.now.to_s)
     end
     
+    def send_token
+      send JSON.generate({
+        type: 'token',
+        text: @token,
+      })
+    end
+    
+    def send_channels
+      channels = MadChatter.channels.collect do |c|
+        {:id => c.id, :name => c.name }
+      end
+      send JSON.generate({
+        type: 'channels',
+        json: channels,
+      })
+    end
+    
     def update_username(username)
       @username = username
     end
     
     def disconnected
-      MadChatter::Server.channels.each do |channel|
+      MadChatter.channels.each do |channel|
         channel.remove_user(self)
       end
       # token = @subscribers.delete(id)
