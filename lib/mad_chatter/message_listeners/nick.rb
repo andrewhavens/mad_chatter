@@ -8,11 +8,11 @@ module MadChatter
       
       def handle(message)
         if message.text =~ @@regex
-          old_username = message.username
           username = parse_username(message.text)
-          MadChatter::Users.update(message.token, username)
-          send_status_message "#{old_username} is now known as #{username}"
-          send_users_list
+          user = message.user
+          if user
+            user.update_username(username)
+          end
           stop_message_handling
         end
       end

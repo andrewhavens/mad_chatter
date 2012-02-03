@@ -17,18 +17,10 @@ module MadChatter
     end
     
     def connected
-      # subscriber_id = MadChatter::Server.main_channel.subscribe(send_message)
-      
       @token = generate_new_token unless @token
       MadChatter.users << self
       send_token
       send_channels
-      
-      # @subscribers[subscriber_id] = token
-      # MadChatter::MessageHistory.all.each do |json|
-      #   send_message.call(json)
-      # end
-      # subscriber_id
     end
     
     def generate_new_token
@@ -53,19 +45,30 @@ module MadChatter
     end
     
     def update_username(username)
+      old_username = @username
       @username = username
+      send_users_list
+      MadChatter.channels.each do |channel|
+        channel.users.each do |user|
+          if user == self
+            channel.send_message MadChatter::Message.new('status', "#{old_username} is now known as #{@username}")
+          end
+        end
+      end
+    end
+    
+    def send_users_list
+      MadChatter.channels.each do |channel|
+        channel.users.each do |user|
+          channel.send_users_list if user == self
+        end
+      end
     end
     
     def disconnected
       MadChatter.channels.each do |channel|
         channel.remove_user(self)
       end
-      # token = @subscribers.delete(id)
-      # username = MadChatter::Users.find_username_by_token(token)
-      # MadChatter::Server.main_channel.unsubscribe(id)
-      # MadChatter::Users.remove(token)
-      # MadChatter::Server.send_json(MadChatter::Message.new('status', "#{username} has left the chatroom").to_json)
-      # MadChatter::Server.send_json(MadChatter::Message.new('users', MadChatter::Users.current).to_json)
     end
     
     def has_token?(token)

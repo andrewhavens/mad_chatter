@@ -1,78 +1,113 @@
 <!DOCTYPE html>
-<html>
-  <head>
-	<title>Mad Chatter</title>
-  <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
-	<!-- <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js'></script> -->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Mad Chatter</title>
+    <meta name="description" content="Mad Chatter">
+    <meta name="author" content="Andrew Havens">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="css/bootstrap.css" rel="stylesheet">		
+    <link href="css/bootstrap.responsive.css" rel="stylesheet">
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114.png">
+</head>
+
+<body>
+
+	<div id="login_screen" class="container" style="position:relative; top:10%; text-align:center;">
+		<div class="hero-unit">
+		<h1>Welcome to Mad&nbsp;Chatter!</h1>
+		<p>You are about to experience the best chat application evah!</p>
+		<form id="pick_a_username" class="well form-search">
+			<input id="username" type="text" placeholder="What is your name?">
+			<button id="join" class="btn">Join</button>
+		</form>
+		</div>
+	</div>
+
+	<div id="chat_wrapper" style="display:none;padding-top:60px">
+		
+		<div class="navbar navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container-fluid">
+				
+					<!-- nav for mobile and small screens -->
+					<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</a>
+					
+					<a class="brand" href="#">Mad Chatter</a>
+					
+					<!-- nav for desktop and large screens -->
+					<div class="nav-collapse">
+						<ul id="channel_tabs" class="nav">
+							<li class="active"><a href="#" data-id="lobby">Lobby</a></li>
+						</ul>
+					</div>
+				
+				</div>
+			</div>
+		</div>
+
+		<div id="lobby" class="container-fluid" style="padding-top:40px;">
+			<h2>Rooms</h2>
+			<ul id="channels"></ul>
+			<p class="create_room" style="display:none">
+				It doesn't look like there are any rooms here. 
+				Why don't you create one? <button class="btn btn-large">Create a Room</button>
+			</p>
+		</div>
+		
+		<!-- template -->
+		<div id="room_template" class="room container-fluid" style="display:none">
+			<div class="span3" style="float:right">
+	          <div class="well sidebar-nav">
+	            <ul class="users nav nav-list">
+	              <li class="nav-header">People</li>
+	            </ul>
+	          </div><!--/.well -->
+	        </div>
 	
-	<!-- markdown editor -->
-<!--
-	<script type="text/javascript" src="markitup/jquery.markitup.js"></script>
-	<link rel="stylesheet" type="text/css" href="markitup/skins/mad_chatter/style.css" />
-	<link rel="stylesheet" type="text/css" href="markitup/sets/markdown/style.css" />
--->
+			<!-- <div class="sidebar">
+				<h2>People</h2>
+				<ul class="users"></ul>
+				<footer>
+					<a id="feature-request" href="javascript:UserVoice.showPopupWidget();">Request a Feature</a>
+				</footer>
+			</div> -->
+			<div class="messages"></div>
+			<div class="new_message">
+				<input type="text"></input>
+			</div>
+		</div>
+	</div>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 
 	<!-- Mad Chatter -->
-	<script src='mad_chatter.js'></script>
-	<script src='mad_chatter_actions.js'></script>
-	<script src='mad_chatter_config.js'></script>
-	<link rel="stylesheet" href="styles.css">
-	
+	<script src='js/mad_chatter.js'></script>
+	<script src='js/mad_chatter_actions.js'></script>
+	<script src='js/mad_chatter_config.js'></script>
 	<script>
 		$(document).ready(function(){
 			MadChatter.init(mad_chatter_config);
 		});
 	</script>
-  </head>
-  <body>
-		
-	<div id="login_screen">
-		<header>
-			<h1>Welcome!</h1>
-		</header>
-		<div id="pick_a_username">
-			<p>What is your name?</p>
-			<input id="username" type="text"> <button id="join">Join</button>
-		</div>
-	</div>
-	
-	<div id="chat_wrapper">
-		
-		<ul id="tabs">
-			<li class="active"><a href="#">Lobby</a></li>
-		</ul>
-		
-		<div id="lobby">
-			<h2>Rooms</h2>
-			<ul id="channels"></ul>
-		</div>
-		
-		<!-- template -->
-		<div id="room_template" class="room" style="display:none">
-			<div class="sidebar">
-				<h2>People</h2>
-				<ul class="users"></ul>
-				<!--
-				<footer>
-					<a id="feature-request" href="javascript:UserVoice.showPopupWidget();">Request a Feature</a>
-				</footer>
-				-->
-			</div>
-			<div class="messages"></div>
-			<div class="new_message"><input type="text"></input></div>
-		</div>
-		
-	</div>
-	
-	<!--
-	<script type="text/javascript">
-	  var uvOptions = {};
-	  (function() {
-	    var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
-	    uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/jE0kfvAFzhwXmLpjSlg.js';
-	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
-	  })();
-	</script>
-	-->
-  </body>
+</body>
 </html>

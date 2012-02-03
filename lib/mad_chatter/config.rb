@@ -4,12 +4,14 @@ module MadChatter
     class << self
       
       def init
-        config = MadChatter::Config.initialize_config
-        MadChatter::Config.initialize_extensions
+        config = init_config
+        init_default_message_listeners
+        init_extensions
+        init_default_channels
         return config
       end
     
-      def initialize_config
+      def init_config
         config_file = File.join(Dir.pwd, 'config.yml')
         abort 'Could not find Mad Chatter config.yml file' unless File.exist?(config_file)
         
@@ -20,8 +22,14 @@ module MadChatter
         }
         @config = defaults.merge!(config)
       end
+      
+      def init_default_message_listeners
+        MadChatter.message_listeners << MadChatter::MessageListeners::Markdown.new
+        MadChatter.message_listeners << MadChatter::MessageListeners::Join.new
+        MadChatter.message_listeners << MadChatter::MessageListeners::Nick.new
+      end
 
-      def initialize_extensions
+      def init_extensions
         simple_extensions_file = File.join(Dir.pwd, 'extensions.rb')
         if File.exist?(simple_extensions_file)
           file_contents = File.read(simple_extensions_file)
@@ -31,6 +39,10 @@ module MadChatter
         # Dir[Dir.pwd + '/extensions/*.rb'].each do |file|
         #   require file
         # end
+      end
+      
+      def init_default_channels
+        MadChatter.channels << MadChatter::Channel.new('default')
       end
       
     end

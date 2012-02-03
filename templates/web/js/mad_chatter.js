@@ -1,26 +1,26 @@
 var MadChatter = {
 	
 	init: function(ws_host){
+		$('#chat_wrapper').hide();
+		MadChatter.init_websocket(ws_host);
+		MadChatter.wait_for_join();
+	},
+	
+	init_websocket: function(ws_host){
 		if (typeof WebSocket === 'undefined') {
 	    	alert("Your browser does not support websockets.")
 			return false;
 	    }
-		MadChatter.init_websocket(ws_host);
-		$('#chat_wrapper').hide();
-		MadChatter.wait_for_join();
-		// MadChatter.add_markdown_editor();
-	},
-	
-	init_websocket: function(ws_host){
 		var ws =  new WebSocket(ws_host);
 		ws.onopen = function(){};
 		ws.onclose = function(){
 			MadChatter.display_status('You have been disconnected');
 			// setTimeout('("MadChatter.reconnect('+ws_host+'")', 10000); //need to figure out how to re-join chat onopen
 		};
-		ws.onmessage = function(evt){
-			//console.log(evt.data)
-			var data = JSON.parse(evt.data);
+		ws.onmessage = function(e){
+			// console.log(e.data)
+			var data = JSON.parse(e.data);
+			console.log(data);
 			MadChatter.message_received(data);
 		};
 		MadChatter.ws = ws;
@@ -31,38 +31,11 @@ var MadChatter = {
 	// },
 	
 	wait_for_join: function(){
-		// $('#username').keyup(function (event) {
-		// 	if (event.keyCode == 13) { // The enter key.
-		// 		MadChatter.join_chat();
-		// 	}
-		// 	    });
-		// $('#join').click(function(){
-		// 	MadChatter.join_chat();
-		// });
 		$('#pick_a_username').submit(function(e){
 			e.preventDefault();
 			MadChatter.join_chat();
 		});
 	},
-	
-	// add_markdown_editor: function(){
-	// 	var config = {
-	// 		previewParserPath: '',
-	// 		onEnter: {keepDefault:false, afterInsert: MadChatter.submit_chat },
-	// 		onShiftEnter: {keepDefault:false, openWith:'\n\n'},
-	// 		markupSet: [	
-	// 			{name:'Bold', key:'B', openWith:'**', closeWith:'**'},
-	// 			{name:'Italic', key:'I', openWith:'_', closeWith:'_'},
-	// 			{separator:'---------------' },
-	// 			{name:'Picture', key:'P', replaceWith:'![[![Alternative text]!]]([![Url:!:http://]!])'},
-	// 			{name:'Link', key:'L', openWith:'[', closeWith:']([![Url:!:http://]!])', placeHolder:'Your text to link here...' },
-	// 			{separator:'---------------'},	
-	// 			{name:'Quotes', openWith:'> '},
-	// 			{name:'Code Block / Code', openWith:'(!(\t|!|`)!)', closeWith:'(!(`)!)'}
-	// 		]
-	// 	};
-	// 	$('#keyboard textarea').markItUp(config);
-	// },
 	
 	join_chat: function(){
 		var username = $.trim($('#username').val());
@@ -70,27 +43,84 @@ var MadChatter = {
 			alert('Please enter your name.');
 			return false;
 		}
+		
 		MadChatter.send_message('/nick ' + username);
-		// MadChatter.send_message('/join default');
+		
 		$('#login_screen').hide();
 		$('#chat_wrapper').show();
+		
 		$('.join_room').on('click', function(e){
 			e.preventDefault();
-			//should probably check if already joined before joining again
-			var channel_id = $(this).attr('data-id');
-			MadChatter.send_message('/join ' + channel_id);
+			$('#lobby').hide();
+			
+			var channel_id = $(this).attr('data-id'),
+				channel_name = $(this).text();
+				
+			MadChatter.join_channel(channel_id, channel_name);
+		});
+		
+		$('#channel_tabs a').on('click', function(e){
+			e.preventDefault();
 			$('#channel_tabs li').removeClass('active');
-			$('#channel_tabs').append('<li class="active"><a href="#" data-id="' + channel_id + '">' + $(this).text() + '</a></li>');
-			$('#room_template').clone().attr('id','').attr('data-id', channel_id).appendTo('#chat_wrapper').show();
+			var channel_id = $(this).attr('data-id');
+			$('.room').hide();
+			if (channel_id == 'lobby') {
+				$('#lobby').show();
+			} else {
+				$('.room[data-id="' + channel_id + '"]').show();
+			}
 		});
 	},
 	
-	submit_chat: function(){
-		var keyboard = $("#keyboard input"), message = keyboard.val();
-		if ($.trim(message) != '') {
-			MadChatter.send_message(message);
-			keyboard.val('');
+	join_channel: function(channel_id, channel_name){
+		var $existing_channel = $('#channel_tabs a[data-id="' + channel_id + '"]');
+		
+		if ($existing_channel.length > 0) { //already joined
+			$existing_channel.trigger('click');
+			return false;
 		}
+		
+		MadChatter.send_message('/join', channel_id);
+		$('#channel_tabs li').removeClass('active');
+		$('#channel_tabs').append('<li class="active"><a href="#" data-id="' + channel_id + '">' + channel_name + '</a></li>');
+		var $room = $('#room_template').clone();
+		$room.attr('id','').attr('data-channel', channel_id);
+		$room.appendTo('#chat_wrapper').show();
+		MadChatter.add_room_actions($room);
+	},
+	
+	add_room_actions: function($room){
+		$('.new_message input', $room).keyup(function(e){
+			if (e.keyCode == 13) { // The enter key.
+				var message = $(this).val(),
+					channel = $(this).closest('.room').attr('data-channel');
+				if ($.trim(message) != '') {
+					MadChatter.send_message(message, channel);
+					$(this).val('');
+				}
+			}
+		});
+	},
+	
+	scroll_to_bottom_of_chat: function(){
+		// $("body")[0].scrollTop = $("#messages")[0].scrollHeight;
+	},
+	
+	send_message: function(message, channel){
+		if (message == '/clear') {
+			MadChatter.clear_messages();
+		} else {
+			var json = {
+				token: MadChatter.client_token, 
+				message: message,
+				channel: channel
+			};
+			MadChatter.ws.send(JSON.stringify(json));
+		}
+	},
+	
+	clear_messages: function(channel){
+		$('.room[data-channel="' + channel + '"] .messages').empty();
 	},
 	
 	message_received: function(data){
@@ -147,32 +177,11 @@ var MadChatter = {
 	},
 			
 	display_status: function(channel, message){
-		$("#messages").append("<p class='status'>" + message + "<time>" + MadChatter.get_current_time() + "</time></p>");
+		$('.room[data-channel="' + channel + '"] .messages').append("<p class='status'>" + message + "<time>" + MadChatter.get_current_time() + "</time></p>");
 	},
 	
 	display_message: function(channel, username, message){
-		$("#messages").append("<p class='message'><time>" + MadChatter.get_current_time() + "</time><span class='username'>" + username + ":</span> " + message + "</p>");
-	},
-	
-	scroll_to_bottom_of_chat: function(){
-		$("body")[0].scrollTop = $("#messages")[0].scrollHeight;
-	},
-	
-	send_message: function(message){
-		if (message == '/clear') {
-			MadChatter.clear_messages();
-		} else {
-			MadChatter.send_json('message', message);
-		}
-	},
-	
-	send_json: function(type, msg){
-		var json = { type: type, token: MadChatter.client_token, message: msg };
-		MadChatter.ws.send(JSON.stringify(json));
-	},
-	
-	clear_messages: function(){
-		$('#messages').empty();
+		$('.room[data-channel="' + channel + '"] .messages').append("<p class='message'><time>" + MadChatter.get_current_time() + "</time><span class='username'>" + username + ":</span> " + message + "</p>");
 	},
 	
 	get_current_time: function(){

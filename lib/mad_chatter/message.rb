@@ -29,6 +29,10 @@ module MadChatter
       @username
     end
     
+    def user
+      MadChatter.find_user_by_token(@token) if @token
+    end
+    
     # Helper method for returning filtered text.
     def text
       @filtered_text

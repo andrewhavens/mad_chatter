@@ -8,24 +8,22 @@ module MadChatter
       
       def handle(message)
         if message.text =~ @@regex
-          # username = parse_username(message.text)
           user = MadChatter.find_user_by_token(message.token)
-          # .update_username(username)
-          if user && message.channel
-            channel = MadChatter.find_channel_by_name(message.channel)
-            if channel
-              channel.add_user(user)
-            end
-            # send_status_message "#{user.username} has joined the chatroom"
-            # send_users_list
+          
+          unless user && message.channel
+            stop_message_handling # user should already exist, and channel id is required
           end
+          
+          channel = MadChatter.find_channel_by_id(message.channel)
+          
+          unless channel
+            stop_message_handling # you cant join a channel that doesnt exist
+          end
+          
+          channel.add_user(user)
           stop_message_handling
         end
       end
-      
-      # def parse_username(text)
-      #   @@regex.match(text).captures[0]
-      # end
       
     end
   end
