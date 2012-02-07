@@ -27,6 +27,7 @@ module MadChatter
         MadChatter.message_listeners << MadChatter::MessageListeners::Markdown.new
         MadChatter.message_listeners << MadChatter::MessageListeners::Join.new
         MadChatter.message_listeners << MadChatter::MessageListeners::Nick.new
+        MadChatter.message_listeners << MadChatter::MessageListeners::Image.new
       end
 
       def init_extensions

@@ -3,3 +3,4 @@
 pkg/*
 .daemon
 coverage/
+.project
