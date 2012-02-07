@@ -20,9 +20,10 @@ module MadChatter
     end
     
     def remove_user(user)
-      @users.delete(user)
-      send_message MadChatter::Message.new('status', "#{user.username} has left the chatroom")
-      send_users_list
+      if @users.delete(user)
+        send_message MadChatter::Message.new('status', "#{user.username} has left the chatroom")
+        send_users_list
+      end
     end
     
     def send_users_list

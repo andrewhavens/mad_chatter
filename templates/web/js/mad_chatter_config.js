@@ -1,1 +1,1 @@
-var mad_chatter_config = 'ws://localhost:8100';
+var mad_chatter_config = 'ws://' + location.hostname + ':8100';

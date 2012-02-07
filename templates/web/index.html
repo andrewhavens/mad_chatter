@@ -5,7 +5,7 @@
     <title>Mad Chatter</title>
     <meta name="description" content="Mad Chatter">
     <meta name="author" content="Andrew Havens">
-
+	
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -13,7 +13,41 @@
 
     <!-- Le styles -->
     <link href="css/bootstrap.css" rel="stylesheet">		
-    <link href="css/bootstrap.responsive.css" rel="stylesheet">
+    
+	<style>
+		body {
+	        padding-top: 60px;
+	        padding-bottom: 80px;
+	      }
+		.channel .status {
+			text-align: center;
+			color: #999;
+		}
+		.channel .users li {
+			margin-bottom: 5px;
+		}
+		.channel .username {
+			font-weight: bold;
+		}
+		.messages time {
+		    color: #999;
+		    display: block;
+		    text-align: center;
+		    border-top: 1px solid #eee;
+		}
+		.channel .sidebar-nav {
+			position: fixed;
+			right: 30px;
+		}
+		.new_message {
+			position: fixed;
+			bottom: 0;
+			width: 110%;
+			margin: 0 0 0 -30px;
+			padding: 10px 0;
+		}
+	</style>
+	<link href="css/bootstrap.responsive.css" rel="stylesheet">
 
     <!-- Le fav and touch icons -->
     <link rel="shortcut icon" href="img/favicon.ico">
@@ -35,7 +69,7 @@
 		</div>
 	</div>
 
-	<div id="chat_wrapper" style="display:none;padding-top:60px">
+	<div id="chat_wrapper" style="display:none;">
 		
 		<div class="navbar navbar-fixed-top">
 			<div class="navbar-inner">
@@ -52,16 +86,14 @@
 					
 					<!-- nav for desktop and large screens -->
 					<div class="nav-collapse">
-						<ul id="channel_tabs" class="nav">
-							<li class="active"><a href="#" data-id="lobby">Lobby</a></li>
-						</ul>
+						<ul id="channel_tabs" class="nav"></ul>
 					</div>
 				
 				</div>
 			</div>
 		</div>
 
-		<div id="lobby" class="container-fluid" style="padding-top:40px;">
+		<div data-channel="lobby" class="channel container-fluid" style="display:none">
 			<h2>Rooms</h2>
 			<ul id="channels"></ul>
 			<p class="create_room" style="display:none">
@@ -71,29 +103,92 @@
 		</div>
 		
 		<!-- template -->
-		<div id="room_template" class="room container-fluid" style="display:none">
-			<div class="span3" style="float:right">
-	          <div class="well sidebar-nav">
-	            <ul class="users nav nav-list">
-	              <li class="nav-header">People</li>
-	            </ul>
-	          </div><!--/.well -->
-	        </div>
-	
-			<!-- <div class="sidebar">
-				<h2>People</h2>
-				<ul class="users"></ul>
-				<footer>
-					<a id="feature-request" href="javascript:UserVoice.showPopupWidget();">Request a Feature</a>
-				</footer>
-			</div> -->
-			<div class="messages"></div>
-			<div class="new_message">
-				<input type="text"></input>
+		<div id="channel_template" class="channel container-fluid" style="display:none">
+			<div class="row">
+				<div class="span2 well sidebar-nav" style="float:right" data-spy="scroll">
+					<ul class="users nav nav-list">
+						<li class="nav-header">Who's Here?</li>
+					</ul>
+				</div>
+				<div class="messages span10"></div>
+			</div>
+			
+			<div class="new_message well">
+				<div class="span10">
+					<input type="text" class="span10"></input>
+				</div>
+				<div class="btn-toolbar span2" style="margin-top:0">
+			        <div class="share btn-group">
+						<a class="send_message btn" href="#">Share</a>
+						<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu bottom-up">
+							<li><a data-toggle="modal" href="#share_photo">Photo</a></li>
+							<li><a data-toggle="modal" href="#share_file">Document</a></li>
+							<li><a data-toggle="modal" href="#share_code">Code Sample</a></li>
+						</ul>
+					</div>
+				</div>
 			</div>
 		</div>
+		
+		<div id="share_photo" class="modal fade hide">
+			<div class="modal-header">
+				<a class="close" data-dismiss="modal">×</a>
+				<h3>Share Photo</h3>
+			</div>
+			<div class="modal-body form-horizontal">
+				<div class="control-group">
+					<label class="control-label" for="upload">Upload File</label>
+					<div class="controls">
+						<input class="input-file" type="file" name="upload">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="url">Photo URL</label>
+					<div class="controls">
+						<input type="text" class="input-xlarge" name="url">
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<a href="#" class="btn btn-primary">Share</a>
+				<a href="#" class="btn" data-dismiss="modal">Cancel</a>
+			</div>
+		</div>
+		
+		<div id="share_file" class="modal fade hide">
+		  <div class="modal-header">
+		    <a class="close" data-dismiss="modal">×</a>
+		    <h3>Share Document</h3>
+		  </div>
+		  <div class="modal-body">
+		    <p>There should be a file upload ability with progress bar.</p>
+		  </div>
+		  <div class="modal-footer">
+		    <a href="#" class="btn btn-primary">Share</a>
+		    <a href="#" class="btn" data-dismiss="modal">Cancel</a>
+		  </div>
+		</div>
+		
+		
+		<div id="share_code" class="modal fade hide">
+		  <div class="modal-header">
+		    <a class="close" data-dismiss="modal">×</a>
+		    <h3>Share Code Sample</h3>
+		  </div>
+		  <div class="modal-body">
+		    <p>There should be a text area here.</p>
+		  </div>
+		  <div class="modal-footer">
+		    <a href="#" class="btn btn-primary">Share</a>
+		    <a href="#" class="btn" data-dismiss="modal">Cancel</a>
+		  </div>
+		</div>
+		
 	</div>
-
+	
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
