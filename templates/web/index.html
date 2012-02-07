@@ -28,6 +28,7 @@
 		}
 		.channel .username {
 			font-weight: bold;
+			vertical-align: top;
 		}
 		.messages time {
 		    color: #999;
@@ -45,6 +46,10 @@
 			width: 110%;
 			margin: 0 0 0 -30px;
 			padding: 10px 0;
+		}
+		#share_code textarea {
+			font: 12px Menlo, Monaco, "Courier New", monospace;
+/*			padding: 2px !important;*/
 		}
 	</style>
 	<link href="css/bootstrap.responsive.css" rel="stylesheet">
@@ -179,7 +184,7 @@
 		    <h3>Share Code Sample</h3>
 		  </div>
 		  <div class="modal-body">
-		    <p>There should be a text area here.</p>
+			<textarea name="code" class="code" rows="10" style="width:520px"></textarea>
 		  </div>
 		  <div class="modal-footer">
 		    <a href="#" class="btn btn-primary">Share</a>
@@ -195,7 +200,7 @@
             <h3>Disconnected</h3>
         </div>
         <div class="modal-body">
-            <p>Looks like you've been disconnected from the server. We'll try to reconnect.</p>
+            <p>Looks like you've been disconnected from the server. We'll try to reconnect you.</p>
         </div>
         <div class="modal-footer">
             <a href="#" class="btn btn-primary">Okay</a>

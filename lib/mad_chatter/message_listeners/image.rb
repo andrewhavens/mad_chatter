@@ -10,10 +10,10 @@ module MadChatter
         if message.text =~ @@regex
           img_url = parse_url(message.text)
           img_msg = MadChatter::Message.new('message', img_url, message.token, message.channel)
-          img_msg.html = %q{<img src="#{img_url}">}
+          img_msg.html = "<img src='#{img_url}'>"
           img_msg.growl = message.username + ' has shared an image'
           channel = MadChatter::find_channel_by_id(message.channel)
-          channel.send_message(img_message)
+          channel.send_message(img_msg)
           stop_message_handling
         end
       end

@@ -24,10 +24,14 @@ module MadChatter
       end
       
       def init_default_message_listeners
-        MadChatter.message_listeners << MadChatter::MessageListeners::Markdown.new
-        MadChatter.message_listeners << MadChatter::MessageListeners::Join.new
-        MadChatter.message_listeners << MadChatter::MessageListeners::Nick.new
-        MadChatter.message_listeners << MadChatter::MessageListeners::Image.new
+        %w{ Join Nick Image Code Markdown }.each do |listener|
+          MadChatter.message_listeners << Object.const_get('MadChatter').const_get('MessageListeners').const_get(listener).new
+        end
+        # MadChatter.message_listeners << MadChatter::MessageListeners::Join.new
+        # MadChatter.message_listeners << MadChatter::MessageListeners::Nick.new
+        # MadChatter.message_listeners << MadChatter::MessageListeners::Image.new
+        # MadChatter.message_listeners << MadChatter::MessageListeners::Code.new
+        # MadChatter.message_listeners << MadChatter::MessageListeners::Markdown.new
       end
 
       def init_extensions

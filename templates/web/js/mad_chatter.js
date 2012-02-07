@@ -7,13 +7,17 @@ var MadChatter = {
 	},
 	
 	init_websocket: function(ws_host){
+		console.log('connecting...');
 		if (typeof WebSocket === 'undefined') {
 	    	alert("Your browser does not support websockets.")
 			return false;
 	    }
 		var ws =  new WebSocket(ws_host);
-		ws.onopen = function(){};
+		ws.onopen = function(){
+			MadChatter.resume_chat();
+		};
 		ws.onclose = function(){
+			MadChatter.token = null;
 			MadChatter.reconnect(ws_host);
 		};
 		ws.onmessage = function(e){
@@ -26,7 +30,23 @@ var MadChatter = {
 	
 	reconnect: function(ws_host){
 		$('#disconnected').modal('show');
-		setTimeout('("MadChatter.init_websocket('+ws_host+'")', 5000); //need to figure out how to re-join chat onopen
+		setTimeout('MadChatter.init_websocket("'+ws_host+'")', 10000);
+	},
+	
+	resume_chat: function(){
+		function resume(){
+			$('#disconnected').modal('hide');
+			if (MadChatter.token && MadChatter.username) {
+				MadChatter.set_username(MadChatter.username);
+				$('#channel_tabs li').each(function(){
+					var channel = $(this).find('a').attr('data-channel');
+					if (channel != 'lobby') {
+						MadChatter.send_message('/join', channel);
+					}
+				});
+			}
+		}
+		setTimeout('resume()', 2000); //wait two seconds. we should have a token by then
 	},
 	
 	wait_for_join: function(){
@@ -43,7 +63,7 @@ var MadChatter = {
 			return false;
 		}
 		
-		MadChatter.send_message('/nick ' + username);
+		MadChatter.set_username(username);
 		$('#login_screen').hide();
 		$('#chat_wrapper').show();
 		
@@ -64,12 +84,31 @@ var MadChatter = {
 		$('#share_photo .btn-primary').on('click', function(e){
 			e.preventDefault();
 			var channel = $('.channel:visible').attr('data-channel'),
-				img_url = $(this).closest('.modal').find('input[name="url"]').val();
+				$input = $(this).closest('.modal').find('input[name="url"]'),
+				img_url = $input.val();
 			if ($.trim(img_url).length > 0) {
 				MadChatter.send_message('/img ' + img_url, channel);
 				$('#share_photo').modal('hide');
+				$input.val('');
 			}
 		});
+		
+		$('#share_code .btn-primary').on('click', function(e){
+			e.preventDefault();
+			var channel = $('.channel:visible').attr('data-channel'),
+				$input = $(this).closest('.modal').find('textarea'),
+				code = $input.val();
+			if ($.trim(code).length > 0) {
+				MadChatter.send_message('/code ' + code, channel);
+				$('#share_code').modal('hide');
+				$input.val('');
+			}
+		});
+	},
+	
+	set_username: function(username){
+		MadChatter.username = username;
+		MadChatter.send_message('/nick ' + username);
 	},
 	
 	add_channel_tab: function(channel_id, channel_name){
@@ -142,7 +181,7 @@ var MadChatter = {
 			MadChatter.clear_messages();
 		} else {
 			var json = {
-				token: MadChatter.client_token, 
+				token: MadChatter.token, 
 				message: message,
 				channel: channel
 			};
@@ -161,7 +200,7 @@ var MadChatter = {
 			return;
 		}
 		if (data.type == 'token') {
-			MadChatter.client_token = data.text;
+			MadChatter.token = data.text;
 			return;
 		}
 		if (data.type == 'channels') {
@@ -238,7 +277,5 @@ var MadChatter = {
 		if (hours == 0) { hours = 12; }
 		if (hours > 12) { hours = hours - 12; }
 		return hours + ':' + minutes + ampm;
-	},
-	
-	last_message_time: ''
+	}
 };

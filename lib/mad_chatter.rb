@@ -24,6 +24,7 @@ require 'mad_chatter/message_listeners/join'
 require 'mad_chatter/message_listeners/markdown'
 require 'mad_chatter/message_listeners/nick'
 require 'mad_chatter/message_listeners/image'
+require 'mad_chatter/message_listeners/code'
 
 require 'mad_chatter/extensions'
 require 'mad_chatter/message_listener'

@@ -5,7 +5,7 @@ module MadChatter
     
     attr_accessor :type, :original_text, :filtered_text, :html, :token, :channel, :growl, :add_to_history
     
-    def initialize(type, text, token = nil, channel = nil)
+    def initialize(type, text = nil, token = nil, channel = nil)
       @type = type
       @original_text = text
       @filtered_text = filter(text)
