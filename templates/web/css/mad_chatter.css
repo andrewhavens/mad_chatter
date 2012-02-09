@@ -2,6 +2,13 @@ body {
     padding-top: 60px;
     padding-bottom: 80px;
 }
+
+#login_screen {
+	position:relative;
+	top:10%;
+	text-align:center;
+}
+
 .channel .messages {
 	padding: 0;
 }

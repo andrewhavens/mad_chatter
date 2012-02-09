@@ -13,7 +13,6 @@
 
     <!-- Le styles -->
     <link href="css/bootstrap.css" rel="stylesheet">
-	<!-- <link href="css/bootstrap.responsive.css" rel="stylesheet"> -->
 	<link href="css/mad_chatter.css" rel="stylesheet">
 
     <!-- Le fav and touch icons -->
@@ -25,7 +24,7 @@
 
 <body>
 
-	<div id="login_screen" class="container-fluid" style="position:relative; top:10%; text-align:center;">
+	<div id="login_screen" class="container-fluid">
 		<div class="hero-unit">
 		<h1>Welcome to Mad&nbsp;Chatter!</h1>
 		<p>You are about to experience the best chat application evah!</p>
@@ -36,33 +35,19 @@
 		</div>
 	</div>
 
-	<div id="chat_wrapper" style="display:none;">
+	<div id="chat_wrapper hide">
 		
 		<div class="navbar navbar-fixed-top">
 			<div class="navbar-inner">
 				<div class="container-fluid">
-				
-					<!-- nav for mobile and small screens -->
-					<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</a>
-					
 					<a class="brand" href="#">Mad Chatter</a>
-					
-					<!-- nav for desktop and large screens -->
-					<div class="nav-collapse">
-						<ul id="channel_tabs" class="nav"></ul>
-					</div>
-					
+					<ul id="channel_tabs" class="nav"></ul>
 					<p id="users-nav" class="navbar-text pull-right hide">Who's Here?</p>
-					
 				</div>
 			</div>
 		</div>
 
-		<div data-channel="lobby" class="channel container-fluid" style="display:none">
+		<div data-channel="lobby" class="channel container-fluid hide">
 			<h2>Rooms</h2>
 			<ul id="channels"></ul>
 			<p class="create_room" style="display:none">
@@ -71,8 +56,7 @@
 			</p>
 		</div>
 		
-		<!-- template -->
-		<div id="channel_template" class="channel container-fluid" style="display:none">
+		<div id="channel_template" class="channel container-fluid hide">
 			
 			<div class="users-list hide">
 				<ul class="users"></ul>
@@ -98,7 +82,6 @@
 					</div>
 				</div>
 			</div>
-			
 		</div>
 		
 		<div id="share_photo" class="modal fade hide">
