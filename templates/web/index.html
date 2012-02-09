@@ -10,7 +10,10 @@
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-
+	<script src="js/swfobject.js"></script>
+	<script src="js/web_socket.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	
     <!-- Le styles -->
     <link href="css/bootstrap.css" rel="stylesheet">
 	<link href="css/mad_chatter.css" rel="stylesheet">
@@ -23,6 +26,11 @@
 </head>
 
 <body>
+	
+	<div id="upgrade_flash" class="container-fluid" style="display:none">
+		<h1>Mad Chatter</h1>
+		<p>Looks like you need to <a href="http://get.adobe.com/flashplayer" class="btn btn-primary">upgrade your flash player</a></p>
+	</div>
 
 	<div id="login_screen" class="container-fluid">
 		<div class="hero-unit">
@@ -164,19 +172,20 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	<script src="js/swfobject.js"></script>
-	<script src="js/web_socket.js"></script>
 	
 	<!-- Mad Chatter -->
 	<script src='js/mad_chatter.js'></script>
 	<script src='js/mad_chatter_actions.js'></script>
 	<script src='js/mad_chatter_config.js'></script>
 	<script>
-		$(document).ready(function(){
+		WEB_SOCKET_DEBUG = true;
+		if (!window.WebSocket && !window.MozWebSocket && swfobject.getFlashPlayerVersion().major < 10) {
+			$('#upgrade_flash').show();
+			$('#login_screen').hide();
+		} else {
 			MadChatter.init(mad_chatter_config);
-		});
+		}
 	</script>
 </body>
 </html>

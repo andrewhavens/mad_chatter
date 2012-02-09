@@ -8,7 +8,6 @@ var MadChatter = {
 	
 	init_websocket: function(ws_host){
 		if (typeof WebSocket === 'undefined') {
-	    	alert("Your browser does not support websockets.")
 			return false;
 	    }
 		var ws =  new WebSocket(ws_host);
@@ -254,7 +253,8 @@ var MadChatter = {
 	},
 
 	exec_action: function(channel, action){
-		window[action.function].apply(window, action.args);
+		// this isnt working in IE 8...why?
+		// window[action.function].apply(window, action.args);
 	},
 			
 	display_status: function(channel, message){
