@@ -7,7 +7,6 @@ var MadChatter = {
 	},
 	
 	init_websocket: function(ws_host){
-		console.log('connecting...');
 		if (typeof WebSocket === 'undefined') {
 	    	alert("Your browser does not support websockets.")
 			return false;
@@ -34,7 +33,7 @@ var MadChatter = {
 	},
 	
 	resume_chat: function(){
-		function resume(){
+		setTimeout(function(){
 			$('#disconnected').modal('hide');
 			if (MadChatter.token && MadChatter.username) {
 				MadChatter.set_username(MadChatter.username);
@@ -45,8 +44,7 @@ var MadChatter = {
 					}
 				});
 			}
-		}
-		setTimeout('resume()', 2000); //wait two seconds. we should have a token by then
+		}, 2000); //wait two seconds. we should have a token by then
 	},
 	
 	wait_for_join: function(){
@@ -72,6 +70,14 @@ var MadChatter = {
 		$('.navbar .brand').on('click', function(e){
 			e.preventDefault();
 			MadChatter.join_channel('lobby');
+		});
+		
+		$('#users-nav').popover({
+			placement: 'bottom',
+			content: function(){
+				return $('.channel:visible .users-list').html();
+			},
+			delay: { show: 0, hide: 1000 }
 		});
 		
 		$('.join_channel').on('click', function(e){
@@ -144,6 +150,11 @@ var MadChatter = {
 				.attr('data-channel', channel_id)
 				.appendTo('#chat_wrapper');
 			MadChatter.add_channel_actions($channel);
+		}
+		if (channel_id == 'lobby') {
+			$('#users-nav').hide();
+		} else {
+			$('#users-nav').show();
 		}
 		$channel.show();
 	},

@@ -1,0 +1,52 @@
+body {
+    padding-top: 60px;
+    padding-bottom: 80px;
+}
+.channel .messages {
+	padding: 0;
+}
+.channel .status {
+	text-align: center;
+	color: #999;
+}
+.users {
+	margin: 0;
+	list-style: none;
+	list-style-position: inside;
+}
+.channel .users li {
+	margin-bottom: 5px;
+}
+.channel .username {
+	font-weight: bold;
+	vertical-align: top;
+}
+.messages time {
+    color: #999;
+    display: block;
+    text-align: right;
+}
+.channel .sidebar-nav {
+	position: fixed;
+	right: 30px;
+}
+.new_message {
+	position: fixed;
+	bottom: 0;
+	margin-left: -20px;
+	margin-bottom: 0;
+	padding: 10px;
+}
+.new_message input {
+	width: 100%;
+}
+#share_code textarea {
+	width:520px;
+	font: 12px Menlo, Monaco, "Courier New", monospace;
+}
+
+/*this should be temporary. not sure how else to fix this*/
+.popover { margin-left: -50px }
+.popover.bottom .arrow { left: 80%; }
+.popover-inner { width: 150px }
+.popover-title { display: none }

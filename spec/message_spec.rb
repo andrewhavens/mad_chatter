@@ -16,7 +16,8 @@ describe MadChatter::Message do
 
   it 'should encode into JSON correctly' do
     message = MadChatter::Message.new('type', 'message', 'token', 'channel')
-    message.to_json.should == '{"type":"type","text":"message","html":"message","username":null,"growl":"message"}'
+    message.to_json.should == 
+      '{"type":"type","text":"message","html":"message","username":null,"channel":"channel","growl":"message"}'
   end
   
   context '#username' do

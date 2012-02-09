@@ -1,5 +1,4 @@
 require_relative '../spec_helper'
-require 'mad_chatter/message_listeners/join'
 
 describe MadChatter::MessageListeners::Join do
 
@@ -19,7 +18,7 @@ describe MadChatter::MessageListeners::Join do
     begin
       MadChatter.users.include?(user).should be_true
       MadChatter.find_channel_by_name('myroom').users.include?(user).should be_false
-      message = MadChatter::Message.new('message', '/join', 'usertoken', 'myroom')
+      message = MadChatter::Message.new('message', '/join', user.token, channel.id)
       listener.handle(message)
       MadChatter.find_channel_by_name('myroom').users.include?(user).should be_true
     rescue RuntimeError

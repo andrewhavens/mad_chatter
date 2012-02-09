@@ -7,12 +7,14 @@ module MadChatter
     
     def initialize(type, text = nil, token = nil, channel = nil)
       @type = type
-      @original_text = text
-      @filtered_text = filter(text)
-      @html = @filtered_text
+      if text
+        @original_text = text
+        @filtered_text = filter(text)
+        @html = @filtered_text
+        @growl = text
+      end
       @token = token
       @channel = channel
-      @growl = text
       @add_to_history = true
     end
     

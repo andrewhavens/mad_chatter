@@ -12,47 +12,9 @@
     <![endif]-->
 
     <!-- Le styles -->
-    <link href="css/bootstrap.css" rel="stylesheet">		
-    
-	<style>
-		body {
-	        padding-top: 60px;
-	        padding-bottom: 80px;
-	      }
-		.channel .status {
-			text-align: center;
-			color: #999;
-		}
-		.channel .users li {
-			margin-bottom: 5px;
-		}
-		.channel .username {
-			font-weight: bold;
-			vertical-align: top;
-		}
-		.messages time {
-		    color: #999;
-		    display: block;
-		    text-align: center;
-		    border-top: 1px solid #eee;
-		}
-		.channel .sidebar-nav {
-			position: fixed;
-			right: 30px;
-		}
-		.new_message {
-			position: fixed;
-			bottom: 0;
-			width: 110%;
-			margin: 0 0 0 -30px;
-			padding: 10px 0;
-		}
-		#share_code textarea {
-			font: 12px Menlo, Monaco, "Courier New", monospace;
-/*			padding: 2px !important;*/
-		}
-	</style>
-	<link href="css/bootstrap.responsive.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
+	<!-- <link href="css/bootstrap.responsive.css" rel="stylesheet"> -->
+	<link href="css/mad_chatter.css" rel="stylesheet">
 
     <!-- Le fav and touch icons -->
     <link rel="shortcut icon" href="img/favicon.ico">
@@ -63,7 +25,7 @@
 
 <body>
 
-	<div id="login_screen" class="container" style="position:relative; top:10%; text-align:center;">
+	<div id="login_screen" class="container-fluid" style="position:relative; top:10%; text-align:center;">
 		<div class="hero-unit">
 		<h1>Welcome to Mad&nbsp;Chatter!</h1>
 		<p>You are about to experience the best chat application evah!</p>
@@ -93,7 +55,9 @@
 					<div class="nav-collapse">
 						<ul id="channel_tabs" class="nav"></ul>
 					</div>
-				
+					
+					<p id="users-nav" class="navbar-text pull-right hide">Who's Here?</p>
+					
 				</div>
 			</div>
 		</div>
@@ -109,18 +73,16 @@
 		
 		<!-- template -->
 		<div id="channel_template" class="channel container-fluid" style="display:none">
-			<div class="row">
-				<div class="span2 well sidebar-nav" style="float:right" data-spy="scroll">
-					<ul class="users nav nav-list">
-						<li class="nav-header">Who's Here?</li>
-					</ul>
-				</div>
-				<div class="messages span10"></div>
+			
+			<div class="users-list hide">
+				<ul class="users"></ul>
 			</div>
 			
-			<div class="new_message well">
+			<div class="messages container-fluid"></div>
+			
+			<div class="new_message well row-fluid">
 				<div class="span10">
-					<input type="text" class="span10"></input>
+					<input type="text"></input>
 				</div>
 				<div class="btn-toolbar span2" style="margin-top:0">
 			        <div class="share btn-group">
@@ -136,6 +98,7 @@
 					</div>
 				</div>
 			</div>
+			
 		</div>
 		
 		<div id="share_photo" class="modal fade hide">
@@ -148,6 +111,7 @@
 					<label class="control-label" for="upload">Upload File</label>
 					<div class="controls">
 						<input class="input-file" type="file" name="upload">
+						<span class="help-block">Doesn't Work Yet</span>
 					</div>
 				</div>
 				<div class="control-group">
@@ -164,17 +128,23 @@
 		</div>
 		
 		<div id="share_file" class="modal fade hide">
-		  <div class="modal-header">
-		    <a class="close" data-dismiss="modal">×</a>
-		    <h3>Share Document</h3>
-		  </div>
-		  <div class="modal-body">
-		    <p>There should be a file upload ability with progress bar.</p>
-		  </div>
-		  <div class="modal-footer">
-		    <a href="#" class="btn btn-primary">Share</a>
-		    <a href="#" class="btn" data-dismiss="modal">Cancel</a>
-		  </div>
+			<div class="modal-header">
+				<a class="close" data-dismiss="modal">×</a>
+				<h3>Share Document</h3>
+			</div>
+			<div class="modal-body form-horizontal">
+				<div class="control-group">
+					<label class="control-label" for="upload">Upload File</label>
+					<div class="controls">
+						<input class="input-file" type="file" name="upload">
+						<span class="help-block">Doesn't Work Yet</span>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<a href="#" class="btn btn-primary">Share</a>
+				<a href="#" class="btn" data-dismiss="modal">Cancel</a>
+			</div>
 		</div>
 		
 		
@@ -184,7 +154,7 @@
 		    <h3>Share Code Sample</h3>
 		  </div>
 		  <div class="modal-body">
-			<textarea name="code" class="code" rows="10" style="width:520px"></textarea>
+			<textarea name="code" rows="10"></textarea>
 		  </div>
 		  <div class="modal-footer">
 		    <a href="#" class="btn btn-primary">Share</a>
@@ -213,7 +183,9 @@
     <!-- Placed at the end of the document so the pages load faster -->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-
+	<script src="js/swfobject.js"></script>
+	<script src="js/web_socket.js"></script>
+	
 	<!-- Mad Chatter -->
 	<script src='js/mad_chatter.js'></script>
 	<script src='js/mad_chatter_actions.js'></script>
