@@ -1,5 +1,16 @@
 Mad Chatter
 
+Version 0.3.1
+ - Fixed UI issues that caused the entire app to not work in 0.3.0 release.
+
+Version 0.3.0
+ - Major changes to underlying code.
+ - New features include:
+   - new look and feel using Twitter bootstrap
+   - ability to create channels (more than one chat room)
+   - Markdown processing has been re-written to only allow a limited set of parsing
+ - This update also included a bug which caused the entire app to not work, so you should use the 0.3.1 and newer releases. 
+
 Version 0.2.5
  - Adjusted daemonization process
 

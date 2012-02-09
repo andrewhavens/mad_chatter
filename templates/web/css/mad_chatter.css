@@ -47,6 +47,9 @@ body {
 .new_message input {
 	width: 100%;
 }
+.new_message .btn-toolbar {
+	margin-top:0;
+}
 #share_code textarea {
 	width:520px;
 	font: 12px Menlo, Monaco, "Courier New", monospace;
