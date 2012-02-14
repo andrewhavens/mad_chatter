@@ -14,7 +14,6 @@ require 'mad_chatter/servers/em_websocket'
 
 require 'mad_chatter/channel'
 require 'mad_chatter/user'
-require 'mad_chatter/users'
 
 require 'mad_chatter/message'
 require 'mad_chatter/message_history'
@@ -30,8 +29,6 @@ require 'mad_chatter/extensions'
 require 'mad_chatter/message_listener'
 
 module MadChatter
-  
-  # attr_accessor :users, :channels, :message_listeners
   
   class << self
     

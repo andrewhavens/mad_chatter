@@ -11,7 +11,7 @@ module MadChatter
       File.expand_path('../../', __FILE__)
     end
     
-    desc "new [name]", "Generates a new Mad Chatter chatroom application"
+    desc "new [name]", "Generates a new Mad Chatter application"
     def new(name)
       copy_file "templates/config.yml", "#{name}/config.yml"
       copy_file "templates/extensions.rb", "#{name}/extensions.rb"
