@@ -16,8 +16,18 @@ describe MadChatter::Message do
 
   it 'should encode into JSON correctly' do
     message = MadChatter::Message.new('type', 'message', 'token', 'channel')
-    message.to_json.should == 
-      '{"type":"type","text":"message","html":"message","username":null,"channel":"channel","growl":"message"}'
+    message.timestamp = 1234567890
+    message.to_json.should == '
+      {
+        "type":"type",
+        "text":"message",
+        "html":"message",
+        "username":null,
+        "channel":"channel",
+        "growl":"message",
+        "time":1234567890
+      }
+    '.gsub(/\s+/, '') # remove the white space
   end
   
   context '#username' do

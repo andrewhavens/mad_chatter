@@ -204,7 +204,6 @@ var MadChatter = {
 	},
 	
 	message_received: function(data){
-		data.type, data.channel, data.username, data.text, data.html, data.growl
 		if (data.type == 'error') {
 			console.log('Client error: ' + data.text)
 			return;
@@ -222,13 +221,13 @@ var MadChatter = {
 			return;
 		}
 		if (data.type == 'status') {
-			MadChatter.display_status(data.channel, data.text);
+			MadChatter.display_status(data.channel, data.text, data.time);
 		}
 		if (data.type == 'action') {
 			MadChatter.exec_action(data.channel, data.json);
 		}
 		if (data.type == 'message') {
-			MadChatter.display_message(data.channel, data.username, data.html);
+			MadChatter.display_message(data.channel, data.username, data.html, data.time);
 			if (typeof(MadChatterGrowl) != 'undefined') {
 				MadChatterGrowl.send_(data.username, data.growl);
 			}
@@ -257,20 +256,20 @@ var MadChatter = {
 		// window[action.function].apply(window, action.args);
 	},
 			
-	display_status: function(channel, message){
-		var html = '<p class="status">' + MadChatter.get_time_html() + message + '</p>';
+	display_status: function(channel, message, timestamp){
+		var html = '<p class="status">' + MadChatter.get_time_html(timestamp) + message + '</p>';
 		$('.channel[data-channel="' + channel + '"] .messages').append(html);
 	},
 	
-	display_message: function(channel, username, message){
-		var html = '<p class="message">' + MadChatter.get_time_html() + '<span class="username">' + username + ':</span> ' + message + '</p>';
+	display_message: function(channel, username, message, timestamp){
+		var html = '<p class="message">' + MadChatter.get_time_html(timestamp) + '<span class="username">' + username + ':</span> ' + message + '</p>';
 		$('.channel[data-channel="' + channel + '"] .messages').append(html);
 	},
 	
-	get_time_html: function(){
+	get_time_html: function(timestamp){
 		var html = '';
 		var last_message_time = MadChatter.last_message_time;
-		var	current_time = MadChatter.get_current_time();
+		var	current_time = MadChatter.get_time_string(timestamp);
 		if (last_message_time != current_time) {
 			MadChatter.last_message_time = current_time;
 			html = '<time>' + current_time + '</time>';
@@ -278,8 +277,8 @@ var MadChatter = {
 		return html;
 	},
 	
-	get_current_time: function(){
-		var time = new Date();
+	get_time_string: function(timestamp){
+		var time = new Date(timestamp*1000); //timestamp must me in milliseconds
 		var hours = time.getHours();
 		var minutes = time.getMinutes();
 		var ampm = 'am';

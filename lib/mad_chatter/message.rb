@@ -3,7 +3,7 @@ require 'cgi'
 module MadChatter
   class Message
     
-    attr_accessor :type, :original_text, :filtered_text, :html, :token, :channel, :growl, :add_to_history
+    attr_accessor :type, :original_text, :filtered_text, :html, :token, :channel, :growl, :add_to_history, :timestamp
     
     def initialize(type, text = nil, token = nil, channel = nil)
       @type = type
@@ -16,6 +16,7 @@ module MadChatter
       @token = token
       @channel = channel
       @add_to_history = true
+      @timestamp = Time.now.to_i
     end
     
     def username=(username)
@@ -48,6 +49,7 @@ module MadChatter
         username: username,
         channel: @channel,
         growl: @growl,
+        time: @timestamp
       })
     end
     
