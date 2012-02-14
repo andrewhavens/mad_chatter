@@ -179,10 +179,9 @@
 	<script src='js/mad_chatter_actions.js'></script>
 	<script src='js/mad_chatter_config.js'></script>
 	<script>
-		WEB_SOCKET_DEBUG = true;
-		if (!window.WebSocket && !window.MozWebSocket && swfobject.getFlashPlayerVersion().major < 10) {
-			$('#upgrade_flash').show();
+		if (!window.WebSocket && swfobject.getFlashPlayerVersion().major < 10) {
 			$('#login_screen').hide();
+			$('#upgrade_flash').show();
 		} else {
 			MadChatter.init(mad_chatter_config);
 		}

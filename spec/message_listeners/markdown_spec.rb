@@ -37,11 +37,16 @@ describe MadChatter::MessageListeners::Markdown do
     message.html.should == 'here is a <strong>strong</strong> statement'
   end
   
-  # TODO
-  # it 'should interpret markdown style links' do
-  #   message = MadChatter::Message.new('message', "[link me up](http://www.example.com)")
-  #   listener.handle(message)
-  #   message.html.should == '<a target="_blank" href="http://www.example.com">link me up</a>'
-  # end
+  it 'should parse backticks as inline code' do
+    message = MadChatter::Message.new('message', "this has `some code` in it")
+    listener.handle(message)
+    message.html.should == 'this has <code>some code</code> in it'
+  end
+  
+  it 'should parse markdown style links' do
+    message = MadChatter::Message.new('message', "[link me up](http://www.example.com)")
+    listener.handle(message)
+    message.html.should == '<a target="_blank" href="http://www.example.com">link me up</a>'
+  end
   
 end

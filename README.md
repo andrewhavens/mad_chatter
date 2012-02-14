@@ -77,17 +77,13 @@ Once you've got your chat server running and being used by other people, you mig
 
 ## Getting Help / Providing Feedback
 
-Feel free to submit a GitHub issue, or post to the [Google Group](https://groups.google.com/group/mad-chatter), or send me a message on GitHub.
+Feel free to submit bug reports and feature requests to our [GitHub Issues page](https://github.com/andrewhavens/mad_chatter/issues), or post to the [Google Group](https://groups.google.com/group/mad-chatter), or send me a message on GitHub.
 
 You can also vote on upcoming features: https://madchatter.uservoice.com
 
 ## Contributing
 
 Please fork and send pull requests! Or submit issues if you have suggestions on how to improve.
-
-## TODO
-
- - Maybe add support for alternative web socket servers like Juggernaut, Socket.io, or Cramp and web-socket-js
 
 ##Copyright
 
