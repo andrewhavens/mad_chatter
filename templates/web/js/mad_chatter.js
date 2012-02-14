@@ -258,24 +258,24 @@ var MadChatter = {
 	},
 			
 	display_status: function(channel, message){
-		MadChatter.display_time(channel);
-		var $html = $('<p class="status">' + message + '</p>');
-		$('.channel[data-channel="' + channel + '"] .messages').append($html);
+		var html = '<p class="status">' + MadChatter.get_time_html() + message + '</p>';
+		$('.channel[data-channel="' + channel + '"] .messages').append(html);
 	},
 	
 	display_message: function(channel, username, message){
-		MadChatter.display_time(channel);
-		var $html = $('<p class="message"><span class="username">' + username + ':</span> ' + message + '</p>');
-		$('.channel[data-channel="' + channel + '"] .messages').append($html);
+		var html = '<p class="message">' + MadChatter.get_time_html() + '<span class="username">' + username + ':</span> ' + message + '</p>';
+		$('.channel[data-channel="' + channel + '"] .messages').append(html);
 	},
 	
-	display_time: function(channel){
-		var last_message_time = MadChatter.last_message_time,
-			current_time = MadChatter.get_current_time();
+	get_time_html: function(){
+		var html = '';
+		var last_message_time = MadChatter.last_message_time;
+		var	current_time = MadChatter.get_current_time();
 		if (last_message_time != current_time) {
 			MadChatter.last_message_time = current_time;
-			$('.channel[data-channel="' + channel + '"] .messages').append('<time>' + current_time + '</time>');
+			html = '<time>' + current_time + '</time>';
 		}
+		return html;
 	},
 	
 	get_current_time: function(){

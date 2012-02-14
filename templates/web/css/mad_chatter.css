@@ -31,7 +31,7 @@ body {
 .messages time {
     color: #999;
     display: block;
-    text-align: right;
+    float: right;
 }
 .channel .sidebar-nav {
 	position: fixed;
