@@ -5,7 +5,7 @@ module MadChatter
     
     attr_accessor :type, :original_text, :filtered_text, :html, :token, :channel, :growl, :add_to_history, :timestamp
     
-    def initialize(type, text = nil, token = nil, channel = nil)
+    def initialize(type, text = nil, token = nil, channel_id = nil)
       @type = type
       if text
         @original_text = text
@@ -14,7 +14,7 @@ module MadChatter
         @growl = text
       end
       @token = token
-      @channel = channel
+      @channel = channel_id
       @add_to_history = true
       @timestamp = Time.now.to_i
     end
