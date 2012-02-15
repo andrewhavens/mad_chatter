@@ -38,12 +38,14 @@ module MadChatter
       def create_channel
         channel_name = %r{^/channel create (.+)}.match(@message.text).captures[0]
         MadChatter.channels << MadChatter::Channel.new(channel_name)
+        MadChatter.send_channels_list
       end
       
       def rename_channel
         channel_name = %r{^/channel rename (.+)}.match(@message.text).captures[0]
         channel = MadChatter.find_channel_by_id(@message.channel)
         channel.name = channel_name
+        MadChatter.send_channels_list
       end
       
     end

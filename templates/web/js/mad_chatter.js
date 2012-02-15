@@ -79,7 +79,7 @@ var MadChatter = {
 			delay: { show: 0, hide: 1000 }
 		});
 		
-		$('.join_channel').on('click', function(e){
+		$('#channels, #channel_tabs').on('click', '.join_channel', function(e){
 			e.preventDefault();
 			var channel_id = $(this).attr('data-channel'),
 				channel_name = $(this).text();
@@ -106,6 +106,17 @@ var MadChatter = {
 			if ($.trim(code).length > 0) {
 				MadChatter.send_message('/code ' + code, channel);
 				$('#share_code').modal('hide');
+				$input.val('');
+			}
+		});
+		
+		$('#create_channel .btn-primary').on('click', function(e){
+			e.preventDefault();
+			var $input = $(this).closest('.modal').find('input');
+			var channel_name = $.trim($input.val());
+			if (channel_name.length > 0) {
+				MadChatter.send_message('/channel create ' + channel_name);
+				$('#create_channel').modal('hide');
 				$input.val('');
 			}
 		});

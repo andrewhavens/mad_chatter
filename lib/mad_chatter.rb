@@ -106,5 +106,22 @@ module MadChatter
       end
     end
     
+    def send_channels_list
+      json = channels_list
+      users.each do |user|
+        user.send(json)
+      end
+    end
+    
+    def channels_list
+      channels_hash = channels.collect do |c|
+        {:id => c.id, :name => c.name }
+      end
+      JSON.generate({
+        type: 'channels',
+        json: channels_hash,
+      })
+    end
+    
   end
 end

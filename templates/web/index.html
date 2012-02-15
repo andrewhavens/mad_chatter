@@ -56,11 +56,12 @@
 		</div>
 
 		<div data-channel="lobby" class="channel container-fluid" style="display:none">
+			<a data-toggle="modal" href="#create_channel" class="btn btn-large" style="float:right">Create a Room</a>
 			<h2>Rooms</h2>
 			<ul id="channels"></ul>
 			<p class="create_room" style="display:none">
 				It doesn't look like there are any rooms here. 
-				Why don't you create one? <button class="btn btn-large">Create a Room</button>
+				Why don't you create one?
 			</p>
 		</div>
 		
@@ -151,6 +152,25 @@
 		    <a href="#" class="btn btn-primary">Share</a>
 		    <a href="#" class="btn" data-dismiss="modal">Cancel</a>
 		  </div>
+		</div>
+		
+		<div id="create_channel" class="modal fade hide">
+			<div class="modal-header">
+				<a class="close" data-dismiss="modal">×</a>
+				<h3>Create New Room</h3>
+			</div>
+			<div class="modal-body form-horizontal">
+				<div class="control-group">
+					<label class="control-label" for="name">Room Name</label>
+					<div class="controls">
+						<input type="text" class="input-xlarge" name="name">
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<a href="#" class="btn btn-primary">Create</a>
+				<a href="#" class="btn" data-dismiss="modal">Cancel</a>
+			</div>
 		</div>
 		
 	</div>

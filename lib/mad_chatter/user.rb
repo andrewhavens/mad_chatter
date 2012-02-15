@@ -35,13 +35,7 @@ module MadChatter
     end
     
     def send_channels
-      channels = MadChatter.channels.collect do |c|
-        {:id => c.id, :name => c.name }
-      end
-      send JSON.generate({
-        type: 'channels',
-        json: channels,
-      })
+      send MadChatter.channels_list
     end
     
     def update_username(username)
