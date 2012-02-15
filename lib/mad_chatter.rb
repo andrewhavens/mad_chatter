@@ -82,6 +82,7 @@ module MadChatter
     
     def message_received(json)
       msg = JSON.parse(json)
+      # puts 'received: ' + msg['message']
       
       if msg['token'].nil?
         return # Token is required to send messages

@@ -9,12 +9,14 @@ module MadChatter
         case @message.text
         when '/join'
           join_channel
+          stop_message_handling
         when %r{^/channel create}
           create_channel
+          stop_message_handling
         when %r{^/channel rename}
           rename_channel
+          stop_message_handling
         end
-        stop_message_handling
       end
       
       def join_channel

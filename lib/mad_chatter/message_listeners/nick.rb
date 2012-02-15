@@ -7,7 +7,7 @@ module MadChatter
       @@regex = %r{^/nick (.+)}
       
       def handle(message)
-        if message.text =~ @@regex
+        if @@regex =~ message.text
           username = parse_username(message.text)
           user = message.user
           if user
