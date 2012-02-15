@@ -19,7 +19,7 @@ require 'mad_chatter/message'
 require 'mad_chatter/message_history'
 
 require 'mad_chatter/actions'
-require 'mad_chatter/message_listeners/join'
+require 'mad_chatter/message_listeners/channel_commands'
 require 'mad_chatter/message_listeners/markdown'
 require 'mad_chatter/message_listeners/nick'
 require 'mad_chatter/message_listeners/image'
