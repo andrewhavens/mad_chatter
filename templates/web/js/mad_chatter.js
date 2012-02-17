@@ -167,6 +167,7 @@ var MadChatter = {
 			$('#users-nav').show();
 		}
 		$channel.show();
+		MadChatter.scroll_to_bottom_of_chat(channel_id);
 	},
 	
 	add_channel_actions: function($channel){
@@ -243,7 +244,7 @@ var MadChatter = {
 				MadChatterGrowl.send_(data.username, data.growl);
 			}
 		}
-		MadChatter.scroll_to_bottom_of_chat();
+		MadChatter.scroll_to_bottom_of_chat(data.channel);
 	},
 	
 	update_channels_list: function(channels){
