@@ -199,7 +199,7 @@ var MadChatter = {
 	
 	send_message: function(message, channel){
 		if (message == '/clear') {
-			MadChatter.clear_messages();
+			MadChatter.clear_messages(channel);
 		} else {
 			var json = {
 				token: MadChatter.token, 
