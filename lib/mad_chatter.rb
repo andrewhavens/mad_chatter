@@ -44,6 +44,7 @@ module MadChatter
       users.each do |user|
         return user if user.token == token
       end
+      return nil
     end
     
     def channels
@@ -58,12 +59,14 @@ module MadChatter
       channels.each do |channel|
         return channel if channel.id == id
       end
+      return nil
     end
         
     def find_channel_by_name(name)
       channels.each do |channel|
         return channel if channel.name == name
       end
+      return nil
     end
     
     def message_listeners

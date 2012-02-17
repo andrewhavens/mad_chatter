@@ -83,6 +83,8 @@ You can also vote on upcoming features: https://madchatter.uservoice.com
 
 ## Contributing
 
+[![Build Status](https://secure.travis-ci.org/andrewhavens/mad_chatter.png)](http://travis-ci.org/andrewhavens/mad_chatter)
+
 Please fork and send pull requests! Or submit issues if you have suggestions on how to improve.
 
 ##Copyright
