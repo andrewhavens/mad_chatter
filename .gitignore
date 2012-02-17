@@ -4,3 +4,5 @@ pkg/*
 .daemon
 coverage/
 .project
+Gemfile.lock
+
