@@ -1,4 +1,4 @@
-require 'spec_helper' # see http://stackoverflow.com/q/5061179/314318
+require 'spec_helper'
 
 describe MadChatter::Message do
 

@@ -1,5 +1,4 @@
-require_relative '../spec_helper'
-require 'mad_chatter/message_listeners/markdown'
+require 'spec_helper'
 
 describe MadChatter::MessageListeners::Markdown do
 
