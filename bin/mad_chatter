@@ -14,8 +14,15 @@ module MadChatter
     desc "new [name]", "Generates a new Mad Chatter application"
     def new(name)
       copy_file "templates/config.yml", "#{name}/config.yml"
-      copy_file "templates/extensions.rb", "#{name}/extensions.rb"
+      directory "templates/extensions", "#{name}/extensions"
       directory "templates/web", "#{name}/web"
+    end
+    
+    desc "update", "Updates an existing Mad Chatter application"
+    def new(name)
+      copy_file "templates/config.yml", "config.yml"
+      directory "templates/extensions", "extensions"
+      directory "templates/web", "web"
     end
     
     desc 'preview', 'Starts both a web server and the Mad Chatter chat server'

@@ -19,14 +19,12 @@ require 'mad_chatter/message'
 require 'mad_chatter/message_history'
 
 require 'mad_chatter/actions'
+require 'mad_chatter/extension'
 require 'mad_chatter/message_listeners/channel_commands'
 require 'mad_chatter/message_listeners/markdown'
 require 'mad_chatter/message_listeners/nick'
 require 'mad_chatter/message_listeners/image'
 require 'mad_chatter/message_listeners/code'
-
-require 'mad_chatter/extension'
-require 'mad_chatter/message_listener'
 
 module MadChatter
   

@@ -12,8 +12,7 @@ module MadChatter
           img_msg = MadChatter::Message.new('message', img_url, message.token, message.channel)
           img_msg.html = "<img src='#{img_url}'>"
           img_msg.growl = message.username + ' has shared an image'
-          channel = MadChatter::find_channel_by_id(message.channel)
-          channel.send_message(img_msg)
+          MadChatter.send_message(message)
           stop_message_handling
         end
       end
