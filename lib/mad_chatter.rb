@@ -95,7 +95,7 @@ module MadChatter
       
       begin
         message_listeners.each do |listener|
-          listener.message = message
+          listener.message = message if listener.respond_to?('message=')
           listener.handle(message)
         end
         send_message(message)

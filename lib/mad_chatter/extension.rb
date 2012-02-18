@@ -29,16 +29,20 @@ module MadChatter
   
     def send_message(text, from = nil)
       m = MadChatter::Message.new('message', text)
-      m.username = from
+      m.username = from || @message.username
+      m.channel = @message.channel
       MadChatter.send_message(m)
     end
   
     def send_status_message(text)
-      MadChatter.send_message MadChatter::Message.new('status', text)
+      MadChatter.send_message MadChatter::Message.new('status', text, nil, @message.channel)
     end
     
     def send_action(action, *args)
-      MadChatter.send_message MadChatter::Message.new('action', {function: action, args: args})
+      m = MadChatter::Message.new('action')
+      m.json = {function: action, args: args}
+      m.channel = @message.channel
+      MadChatter.send_message(m)
     end
   end
 end
