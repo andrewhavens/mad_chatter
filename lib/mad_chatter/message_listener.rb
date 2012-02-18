@@ -8,7 +8,7 @@ module MadChatter
     end
   
     def handle(message)
-      if message.original_text =~ @regex
+      if message.text =~ @regex
         args = @regex.match(message.original_text).captures
         @block.call(args)
       end

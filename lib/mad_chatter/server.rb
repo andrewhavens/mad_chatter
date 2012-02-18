@@ -7,12 +7,7 @@ module MadChatter
     end
     
     def initialize_server
-      # TODO: Figure out a better (more flexible/dynamic) way to initialize the server class
-      if @config['websocket_backend'] && @config['websocket_backend'] == 'MadChatter::Servers::EventMachineWebSocket'
-        return MadChatter::Servers::EventMachineWebSocket.new(@config['websocket_port'], self)
-      end
-      
-      raise 'You did not specify a valid class name for websocket_backend'
+      return MadChatter::Servers::EventMachineWebSocket.new(@config['websocket_port'], self)
     end
   
     def start

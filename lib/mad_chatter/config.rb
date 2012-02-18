@@ -17,7 +17,6 @@ module MadChatter
         
         config = YAML::load(File.open(config_file))
         defaults = {
-          'websocket_backend' => 'websocket-rack',
           'websocket_port' => 8100,
         }
         @config = defaults.merge!(config)
@@ -30,15 +29,17 @@ module MadChatter
       end
 
       def init_extensions
-        simple_extensions_file = File.join(Dir.pwd, 'extensions.rb')
-        if File.exist?(simple_extensions_file)
-          file_contents = File.read(simple_extensions_file)
-          # MadChatter::Extensions.module_eval file_contents
-        end
-        
-        # Dir[Dir.pwd + '/extensions/*.rb'].each do |file|
-        #   require file
+        # simple_extensions_file = File.join(Dir.pwd, 'extensions.rb')
+        # if File.exist?(simple_extensions_file)
+        #   file_contents = File.read(simple_extensions_file)
+        #   MadChatter::Extensions.class_eval file_contents
         # end
+        
+        # Auto-require User Defined Extension Classes
+        Dir[Dir.pwd + '/extensions/*.rb'].each do |file|
+          require file
+          # MadChatter.message_listeners << Object.const_get('MadChatter').const_get('Extensions').const_get(file).new
+        end
       end
       
       def init_default_channels

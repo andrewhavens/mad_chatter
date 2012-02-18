@@ -4,7 +4,7 @@ module MadChatter
     def stop_message_handling
       raise "Don't call any more message listeners"
     end
-  
+    
     # def send_json(json)
     #   MadChatter.send_json(json)
     # end

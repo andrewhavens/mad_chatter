@@ -25,7 +25,7 @@ require 'mad_chatter/message_listeners/nick'
 require 'mad_chatter/message_listeners/image'
 require 'mad_chatter/message_listeners/code'
 
-require 'mad_chatter/extensions'
+require 'mad_chatter/extension'
 require 'mad_chatter/message_listener'
 
 module MadChatter
@@ -95,6 +95,7 @@ module MadChatter
       
       begin
         message_listeners.each do |listener|
+          listener.message = message
           listener.handle(message)
         end
         send_message(message)
