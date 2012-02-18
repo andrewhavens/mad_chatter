@@ -22,6 +22,7 @@ describe MadChatter::Message do
         "type":"type",
         "text":"message",
         "html":"message",
+        "json":null,
         "username":null,
         "channel":"channel",
         "growl":"message",
