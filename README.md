@@ -2,7 +2,7 @@
 
 Mad Chatter is a fun, easy to customize chat server. It's written in Ruby and utilizes HTML 5 Web Sockets for fast communication.
 
-The goal of Mad Chatter is to basically become an open-source version of [Campfire](http://campfirenow.com/), [HipChat](https://www.hipchat.com), or [FlowDock](https://www.flowdock.com). Or at least use those as inspiration.
+The goal of Mad Chatter is to basically become an open-source version of [Campfire](http://campfirenow.com/), [HipChat](https://www.hipchat.com), or [FlowDock](https://www.flowdock.com)...or at least use those as inspiration.
 
 ## Getting Started
 
@@ -22,7 +22,7 @@ This command will generate the following structure:
 
     mychatroom/
         config.yml      # for general configuration
-        extensions.rb   # for writing your own extensions
+        extensions/     # for writing your own extensions
         web/            # all of the html, css, and javascript live here
 
 To start your chat server, navigate to the directory that was just created and run...
@@ -33,7 +33,7 @@ This will start up the Mad Chatter chat server as well as a simple web server fo
 
 ![Mad Chatter screenshot](https://raw.github.com/andrewhavens/mad_chatter/master/screenshot.png)
 
-When you're ready to have other people use your chat server (friends, family, co-workers, etc) you'll want to host the server and web directory some place that they can access (on a web server, for example, if it will be used outside your local network). You'll also want to start the chat server and leave it running for a long time in the background. This is known as a "daemon". Here are a few useful commands for that:
+When you're ready to have other people start using your new chat server (friends, family, co-workers, etc) you'll need to set up a web server so other people can access it. Set up your web server to serve the `web` directory that we created above. Now you're ready to start Mad Chatter and leave it running in the background. Here are a few useful commands for that:
 
     mad_chatter start
     mad_chatter stop
@@ -41,7 +41,7 @@ When you're ready to have other people use your chat server (friends, family, co
 
 ## Chat Actions
 
-Mad Chatter can do some special things depending on the chat messages you send. Every chat message is parsed to see if it is a normal chat message, or if its a special action. These actions are much like IRC commands. For example, if I wanted to change my screen name from Andrew to Andy I could chat this message:
+Mad Chatter can do some special things depending on the chat messages you send. Every chat message is parsed to see if it is a normal chat message, or if it's a special action. These actions are much like IRC commands. For example, if I wanted to change my name from Andrew to Andy I could chat this message:
 
     /nick andy
 
@@ -62,31 +62,30 @@ You can even create your own actions!
 
 The goal of Mad Chatter is to make it easy to create, host, and customize your own chat server. Let's take a look at the different ways you can customize your new chat server.
 
-If you want to customize the html/css of your chatroom, you'll find it in the `web` directory.
+All of the HTML, CSS, and Javascript is available for you to customize in the `web` directory.
 
 In the `config.yml` file you can see a few things you can customize.
 
-The `extensions.rb` file is for you to create your own chat extensions. You will find a few examples in that file.
+The `extensions` directory contains all of your extensions. If you wanted to create a custom action, this is where you would put it. You will find a few examples in that directory.
 
 
 ## Mac, Windows, and Linux Wrappers
 
-Once you've got your chat server running and being used by other people, you might be interested in using/distributing an installable application so your users have the convenience of clicking on an icon, receiving growl notifications, etc. Here's a list of the currently available "wrapper" applications:
+Once you've got your chat server running and being used by other people, you might be interested in using and distributing an installable application so your users have the convenience of clicking on an icon, receiving growl notifications, etc. Here's a list of the currently available "wrapper" applications:
 
  * [Mad Chatter for Mac](https://github.com/andrewhavens/mad_chatter_for_mac)
 
 ## Getting Help / Providing Feedback
 
-Feel free to submit bug reports and feature requests to our [GitHub Issues page](https://github.com/andrewhavens/mad_chatter/issues), or post to the [Google Group](https://groups.google.com/group/mad-chatter), or send me a message on GitHub.
+If you need help or have feedback, feel free to submit bug reports and feature requests to our [GitHub Issues page](https://github.com/andrewhavens/mad_chatter/issues), or post to the [Google Group](https://groups.google.com/group/mad-chatter).
 
 You can also vote on upcoming features: https://madchatter.uservoice.com
 
 ## Contributing
 
+Please fork and send pull requests! Or submit issues if you have suggestions on how to improve Mad Chatter.
 [![Build Status](https://secure.travis-ci.org/andrewhavens/mad_chatter.png)](http://travis-ci.org/andrewhavens/mad_chatter)
-
-Please fork and send pull requests! Or submit issues if you have suggestions on how to improve.
 
 ##Copyright
 
-Copyright (c) 2011-2012 Andrew Havens. MIT license. See LICENSE.txt for further details.
+Created by Andrew Havens and released under the MIT license.
