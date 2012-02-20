@@ -10,6 +10,7 @@ require 'mad_chatter/version'
 require 'mad_chatter/config'
 
 require 'mad_chatter/server'
+require 'mad_chatter/servers/http'
 require 'mad_chatter/servers/em_websocket'
 
 require 'mad_chatter/channel'

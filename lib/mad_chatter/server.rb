@@ -14,6 +14,7 @@ module MadChatter
       EM.run do
         puts "Starting Mad Chatter Web Socket server on port #{@config['websocket_port']}."
         @server.start
+        MadChater::Servers::Http.run!({:port=>3001})
       end
     end
     

@@ -22,6 +22,11 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "eventmachine"
   s.add_runtime_dependency "em-websocket"
   s.add_runtime_dependency "daemons", "1.1.4"
+  s.add_runtime_dependency 'sinatra'
+  s.add_runtime_dependency 'carrierwave'
+  # s.add_runtime_dependency 'sqlite3'
+  # s.add_runtime_dependency 'sequel'
+  # s.add_runtime_dependency 'carrierwave/sequel'
 
   s.add_development_dependency "rspec"
   # s.add_development_dependency "shoulda" # do we need this?
