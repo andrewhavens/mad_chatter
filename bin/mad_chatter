@@ -19,7 +19,7 @@ module MadChatter
     end
     
     desc "update", "Updates an existing Mad Chatter application"
-    def new(name)
+    def update
       copy_file "templates/config.yml", "config.yml"
       directory "templates/extensions", "extensions"
       directory "templates/web", "web"
