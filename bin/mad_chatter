@@ -27,6 +27,7 @@ module MadChatter
     
     desc 'preview', 'Starts both a web server and the Mad Chatter chat server'
     def preview
+      puts 'Starting the web server at http://localhost:3000'
       t1 = Thread.new { require 'mad_chatter/web_server' }
       t2 = Thread.new { require 'mad_chatter'; MadChatter.start }
       t2.join()

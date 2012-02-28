@@ -1,5 +1,8 @@
 Mad Chatter
 
+Version 0.3.4
+ - Fixed a bug that broke the ability to create a new project.
+
 Version 0.3.1
  - Fixed UI issues that caused the entire app to not work in 0.3.0 release.
 
