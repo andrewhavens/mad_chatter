@@ -1,0 +1,134 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Mad chatter by andrewhavens</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Mad chatter</h1>
+        <p>Mad Chatter is a fun, easy to customize chat server written in Ruby utilizing HTML 5 Web Sockets</p>
+        <p class="view"><a href="https://github.com/andrewhavens/mad_chatter">View the Project on GitHub <small>andrewhavens/mad_chatter</small></a></p>
+        <ul>
+          <li><a href="https://github.com/andrewhavens/mad_chatter/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/andrewhavens/mad_chatter/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/andrewhavens/mad_chatter">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>Mad Chatter</h1>
+
+<p>Mad Chatter is a fun, easy to customize chat server. It's written in Ruby and utilizes HTML 5 Web Sockets for fast communication.</p>
+
+<p>The goal of Mad Chatter is to basically become an open-source version of <a href="http://campfirenow.com/">Campfire</a>, <a href="https://www.hipchat.com">HipChat</a>, or <a href="https://www.flowdock.com">FlowDock</a>...or at least use those as inspiration.</p>
+
+<h2>Getting Started</h2>
+
+<p>Since Mad Chatter is written in Ruby, you'll need to install Ruby in order to continue. We have a wiki page to help you with that:</p>
+
+<p><a href="https://github.com/andrewhavens/mad_chatter/wiki/How-to-install-Ruby-and-RubyGems">How to install Ruby and RubyGems</a></p>
+
+<p>Once you have RubyGems installed, you can install the Mad Chatter gem:</p>
+
+<pre><code>gem install mad_chatter
+</code></pre>
+
+<p>Then generate the directory where your chat application will live:</p>
+
+<pre><code>mad_chatter new mychatroom
+</code></pre>
+
+<p>This command will generate the following structure:</p>
+
+<pre><code>mychatroom/
+    config.yml      # for general configuration
+    extensions/     # for writing your own extensions
+    web/            # all of the html, css, and javascript live here
+</code></pre>
+
+<p>To start your chat server, navigate to the directory that was just created and run...</p>
+
+<pre><code>mad_chatter preview
+</code></pre>
+
+<p>This will start up the Mad Chatter chat server as well as a simple web server for you to preview/demo your new chat room. Now you can check it out by opening http://localhost:3000 in your browser. You should see something like this:</p>
+
+<p><img src="https://raw.github.com/andrewhavens/mad_chatter/master/screenshot.png" alt="Mad Chatter screenshot"></p>
+
+<p>When you're ready to have other people start using your new chat server (friends, family, co-workers, etc) you'll need to set up a web server so other people can access it. Set up your web server to serve the <code>web</code> directory that we created above. Now you're ready to start Mad Chatter and leave it running in the background. Here are a few useful commands for that:</p>
+
+<pre><code>mad_chatter start
+mad_chatter stop
+mad_chatter restart
+</code></pre>
+
+<h2>Chat Actions</h2>
+
+<p>Mad Chatter can do some special things depending on the chat messages you send. Every chat message is parsed to see if it is a normal chat message, or if it's a special action. These actions are much like IRC commands. For example, if I wanted to change my name from Andrew to Andy I could chat this message:</p>
+
+<pre><code>/nick andy
+</code></pre>
+
+<p>Mad Chatter will interpret this message as an action and change the user name to andy.</p>
+
+<p>If I wanted to embed a YouTube video for all the members of the chatroom to enjoy, I could type:</p>
+
+<pre><code>/youtube http://youtu.be/n1NVfDlU6yQ
+</code></pre>
+
+<p>Or if I wanted to shake everyone's chat window:</p>
+
+<pre><code>/earthquake
+</code></pre>
+
+<p>You can even create your own actions!</p>
+
+<h2>Customizing</h2>
+
+<p>The goal of Mad Chatter is to make it easy to create, host, and customize your own chat server. Let's take a look at the different ways you can customize your new chat server.</p>
+
+<p>All of the HTML, CSS, and Javascript is available for you to customize in the <code>web</code> directory.</p>
+
+<p>In the <code>config.yml</code> file you can see a few things you can customize.</p>
+
+<p>The <code>extensions</code> directory contains all of your extensions. If you wanted to create a custom action, this is where you would put it. You will find a few examples in that directory.</p>
+
+<h2>Mac, Windows, and Linux Wrappers</h2>
+
+<p>Once you've got your chat server running and being used by other people, you might be interested in using and distributing an installable application so your users have the convenience of clicking on an icon, receiving growl notifications, etc. Here's a list of the currently available "wrapper" applications:</p>
+
+<ul>
+<li><a href="https://github.com/andrewhavens/mad_chatter_for_mac">Mad Chatter for Mac</a></li>
+</ul><h2>Getting Help / Providing Feedback</h2>
+
+<p>If you need help or have feedback, feel free to submit bug reports and feature requests to our <a href="https://github.com/andrewhavens/mad_chatter/issues">GitHub Issues page</a>, or post to the <a href="https://groups.google.com/group/mad-chatter">Google Group</a>.</p>
+
+<p>You can also vote on upcoming features: <a href="https://madchatter.uservoice.com">https://madchatter.uservoice.com</a></p>
+
+<h2>Contributing</h2>
+
+<p>Please fork and send pull requests! Or submit issues if you have suggestions on how to improve Mad Chatter.
+<a href="http://travis-ci.org/andrewhavens/mad_chatter"><img src="https://secure.travis-ci.org/andrewhavens/mad_chatter.png" alt="Build Status"></a></p>
+
+<h2>Copyright</h2>
+
+<p>Created by Andrew Havens and released under the MIT license.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/andrewhavens">andrewhavens</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
